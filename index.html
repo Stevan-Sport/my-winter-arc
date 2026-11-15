@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="theme-color" content="#111111">
+
+<title>My Winter Arc</title>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{margin:0;background:#101010;color:#f5f5f5;font-family:Arial,sans-serif;padding-bottom:85px}
+
+header{padding:28px 20px 18px;border-bottom:1px solid #303030}
+
+header small,.muted{color:#999}
+
+h1{font-size:27px;margin:7px 0}
+
+h2{font-size:21px;margin:8px 0 16px}
+
+main{max-width:650px;margin:auto;padding:20px}
+
+.page{display:none}.page.active{display:block}
+
+.card{background:#1c1c1c;border:1px solid #333;border-radius:16px;padding:17px;margin:14px 0}
+
+.big{font-size:34px;font-weight:bold}
+
+.progress{height:8px;background:#383838;border-radius:20px;overflow:hidden;margin:12px 0}
+
+.progress div{height:100%;background:#eee;width:0}
+
+button,input,textarea,select{font:inherit}
+
+button{background:#eee;color:#111;border:0;border-radius:10px;padding:11px 15px;font-weight:bold}
+
+button.secondary{background:#333;color:#fff}
+
+nav{position:fixed;bottom:0;left:0;right:0;background:#181818;border-top:1px solid #333;display:flex;justify-content:space-around;padding:10px 3px calc(10px + env(safe-area-inset-bottom));z-index:5}
+
+nav button{background:transparent;color:#aaa;padding:8px 5px;font-size:12px}
+
+nav button.active{color:white;background:#333}
+
+label{display:block;margin:12px 0;color:#ddd}
+
+input[type=text],input[type=number],textarea{width:100%;padding:11px;background:#292929;border:1px solid #444;border-radius:9px;color:white;margin-top:6px}
+
+textarea{min-height:90px}
+
+.check{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #333}
+
+.check input{width:19px;height:19px;accent-color:white}
+
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+
+.exercise{padding:12px 0;border-bottom:1px solid #333}
+
+img.preview{width:100%;max-height:240px;object-fit:cover;border-radius:12px;margin-top:10px}
+
+small{color:#aaa}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<small>TON ESPACE • 90 JOURS POUR TOI</small>
+
+<h1>MY WINTER ARC <span style="color:#888">✦</span></h1>
+
+<div class="muted">Deviens ta propre priorité.</div>
+
+</header>
+
+<main>
+
+<section id="home" class="page active">
+
+<div class="card">
+
+<small>MON PARCOURS</small>
+
+<div class="big"><span id="day">1</span> <span class="muted">/ 90 jours</span></div>
+
+<div class="progress"><div id="bar"></div></div>
+
+<div class="row"><span id="percent">0 % terminé</span><span id="streak">🔥 0 jours</span></div>
+
+</div>
+
+<div class="card">
+
+<h2>Mes habitudes du jour</h2>
+
+<div id="habits"></div>
+
+<button onclick="validateDay()">Valider ma journée</button>
+
+<p class="muted" id="dayMessage"></p>
+
+</div>
+
+<div class="card">
+
+<h2>Mon intention du jour</h2>
+
+<textarea id="intention" placeholder="Aujourd'hui, je veux..."></textarea>
+
+<button class="secondary" onclick="saveIntention()">Enregistrer</button>
+
+</div>
+
+</section>
+
+<section id="sport" class="page">
+
+<h2>Mon espace sport</h2>
+
+<p class="muted">Construis ton programme à ton rythme.</p>
+
+<div class="card">
+
+<h2>Ajouter un exercice</h2>
+
+<label>Jour
+
+<select id="exDay"><option>Lundi</option><option>Mardi</option><option>Mercredi</option><option>Jeudi</option><option>Vendredi</option><option>Samedi</option><option>Dimanche</option></select></label>
+
+<label>Exercice<input id="exName" type="text" placeholder="Ex. Squats"></label>
+
+<div class="row">
+
+<label style="flex:1">Séries<input id="exSets" type="number" value="3" min="1"></label>
+
+<label style="flex:1">Répétitions<input id="exReps" type="text" value="12"></label>
+
+<label style="flex:1">Repos (sec)<input id="exRest" type="number" value="60"></label>
+
+</div>
+
+<button onclick="addExercise()">Ajouter l'exercice</button>
+
+</div>
+
+<div id="exerciseList"></div>
+
+</section>
+
+<section id="glow" class="page">
+
+<h2>Mon Glow Up ✨</h2>
+
+<div class="card">
+
+<h2>Mes objectifs</h2>
+
+<label>Peau et skincare<input id="skin" type="text" placeholder="Mon objectif..."></label>
+
+<label>Cheveux et beauté<input id="hair" type="text" placeholder="Mon objectif..."></label>
+
+<label>Confiance et mindset<input id="mind" type="text" placeholder="Mon objectif..."></label>
+
+<label>Mon objectif personnel<input id="personal" type="text" placeholder="Mon objectif..."></label>
+
+<button onclick="saveGoals()">Enregistrer mes objectifs</button>
+
+</div>
+
+<div class="card">
+
+<h2>Mon avant / après</h2>
+
+<p class="muted">Choisis une photo depuis ton téléphone pour la visualiser ici.</p>
+
+<label>Photo avant<input type="file" accept="image/*" onchange="previewPhoto(event,'before')"></label>
+
+<img id="before" class="preview" hidden>
+
+<label>Photo après<input type="file" accept="image/*" onchange="previewPhoto(event,'after')"></label>
+
+<img id="after" class="preview" hidden>
+
+<small>Les aperçus photo sont temporaires dans cette première version.</small>
+
+</div>
+
+<div class="card">
+
+<h2>Mon journal</h2>
+
+<textarea id="journal" placeholder="Mes pensées, mes progrès, mes victoires..."></textarea>
+
+<button onclick="saveJournal()">Enregistrer</button>
+
+</div>
+
+</section>
+
+<section id="stats" class="page">
+
+<h2>Mes statistiques</h2>
+
+<div class="card"><small>JOURNÉES VALIDÉES</small><div class="big" id="validated">0</div></div>
+
+<div class="card"><small>JOURS ÉCOULÉS</small><div class="big" id="elapsed">1 / 90</div></div>
+
+<div class="card"><small>HABITUDES COCHÉES AUJOURD'HUI</small><div class="big" id="done">0 / 7</div></div>
+
+<div class="card"><h2>Mon calendrier</h2><div id="calendar" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px"></div><small>Les jours validés apparaissent en blanc.</small></div>
+
+</section>
+
+</main>
+
+<nav>
+
+<button class="active" onclick="showPage('home',this)">⌂<br>Accueil</button>
+
+<button onclick="showPage('sport',this)">♡<br>Sport</button>
+
+<button onclick="showPage('glow',this)">✧<br>Glow Up</button>
+
+<button onclick="showPage('stats',this)">▦<br>Stats</button>
+
+</nav>
+
+<script>
+
+const defaults=['Boire suffisamment d’eau','Faire du sport ou bouger','Faire ma skincare','Manger équilibré','Dormir suffisamment','Lire ou apprendre','Prendre du temps pour moi'];
+
+let data={};
+
+try{data=JSON.parse(localStorage.getItem('winterArc')||'{}')}catch(e){data={}}
+
+data.checks=data.checks||{};
+
+data.validated=data.validated||[];
+
+data.exercises=data.exercises||[];
+
+function save(){localStorage.setItem('winterArc',JSON.stringify(data));render()}
+
+function today(){return new Date().toISOString().slice(0,10)}
+
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
+
+function render(){
+
+let checks=data.checks[today()]||[];
+
+document.getElementById('habits').innerHTML=defaults.map((h,i)=>`<label class="check"><input type="checkbox" ${checks.includes(i)?'checked':''} onchange="toggleHabit(${i},this.checked)"><span>${h}</span></label>`).join('');
+
+let done=checks.length,valid=data.validated.length;
+
+document.getElementById('done').textContent=done+' / 7';
+
+document.getElementById('validated').textContent=valid;
+
+document.getElementById('day').textContent=Math.min(90,valid+1);
+
+document.getElementById('elapsed').textContent=Math.min(90,valid+1)+' / 90';
+
+document.getElementById('percent').textContent=Math.round(valid/90*100)+' % terminé';
+
+document.getElementById('bar').style.width=(valid/90*100)+'%';
+
+let streak=0;for(let i=0;i<90;i++){let d=new Date();d.setDate(d.getDate()-i);let key=d.toISOString().slice(0,10);if(data.validated.includes(key))streak++;else if(i>0)break}
+
+document.getElementById('streak').textContent='🔥 '+streak+' jours';
+
+document.getElementById('exerciseList').innerHTML=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'].map(day=>`<div class="card"><h2>${day}</h2>${data.exercises.filter(e=>e.day===day).map(e=>`<div class="exercise"><b>${escapeHTML(e.name)}</b><br><small>${e.sets} séries • ${escapeHTML(e.reps)} répétitions • repos ${e.rest} sec</small></div>`).join('')||'<small>Aucun exercice prévu.</small>'}</div>`).join('');
+
+document.getElementById('calendar').innerHTML=Array.from({length:90},(_,i)=>`<div style="background:${data.validated.includes(dateAt(i))?'#eee':'#333'};color:${data.validated.includes(dateAt(i))?'#111':'#aaa'};border-radius:6px;text-align:center;padding:9px 0;font-size:12px">${i+1}</div>`).join('');
+
+}
+
+function dateAt(i){let d=new Date();d.setDate(d.getDate()-i);return d.toISOString().slice(0,10)}
+
+function toggleHabit(i,on){let c=data.checks[today()]||[];data.checks[today()]=on?[...new Set([...c,i])]:c.filter(x=>x!==i);save()}
+
+function validateDay(){if(!(data.checks[today()]||[]).length){document.getElementById('dayMessage').textContent='Coche au moins une habitude avant de valider.';return}if(!data.validated.includes(today()))data.validated.push(today());document.getElementById('dayMessage').textContent='Bravo, journée validée !';save()}
+
+function addExercise(){let name=document.getElementById('exName').value.trim();if(!name)return alert('Ajoute le nom de ton exercice.');data.exercises.push({day:document.getElementById('exDay').value,name,sets:document.getElementById('exSets').value,reps:document.getElementById('exReps').value,rest:document.getElementById('exRest').value});document.getElementById('exName').value='';save()}
+
+function saveIntention(){data.intention=document.getElementById('intention').value;save();alert('Intention enregistrée !')}
+
+function saveGoals(){data.goals={skin:skin.value,hair:hair.value,mind:mind.value,personal:personal.value};save();alert('Objectifs enregistrés !')}
+
+function saveJournal(){data.journal=journal.value;save();alert('Journal enregistré !')}
+
+function previewPhoto(e,id){let f=e.target.files[0];if(f){let img=document.getElementById(id);img.src=URL.createObjectURL(f);img.hidden=false}}
+
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+document.getElementById('intention').value=data.intention||'';
+
+document.getElementById('journal').value=data.journal||'';
+
+if(data.goals){skin.value=data.goals.skin||'';hair.value=data.goals.hair||'';mind.value=data.goals.mind||'';personal.value=data.goals.personal||''}
+
+render();
+
+</script>
+
+</body>
+
+</html>
