@@ -1,833 +1,602 @@
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101010">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="YEARS ARC">
-  <title>YEARS ARC</title>
-
 <style>
 :root {
-  --bg:#101010;
-  --panel:#191919;
-  --panel2:#202020;
+  --bg:#090909;
+  --panel:#141414;
+  --panel2:#1c1c1c;
   --line:#303030;
-  --text:#f3f3f3;
-  --muted:#929292;
-  --green:#78977f;
-  --red:#a66e6e;
-  --gold:#b9a47a;
+  --text:#eeeeec;
+  --muted:#92918d;
+  --green:#829486;
+  --red:#a47777;
+  --gold:#b69b67;
+  --silver:#c8c8c5;
   --radius:18px;
 }
+
 * { box-sizing:border-box; }
+
 body {
   margin:0;
   background:var(--bg);
   color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   padding:env(safe-area-inset-top) 0 calc(92px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing:antialiased;
 }
+
 button,input,select,textarea { font:inherit; }
 button { cursor:pointer; }
-.app { max-width:680px; margin:auto; padding:20px 17px; }
-header { display:flex; justify-content:space-between; align-items:center; margin:8px 0 25px; }
-.brand { font-size:21px; font-weight:850; letter-spacing:2.8px; }
-.tagline { color:var(--muted); font-size:9px; letter-spacing:2px; margin-top:5px; }
-.header-date { font-size:11px; color:var(--muted); text-align:right; }
-h1 { font-size:27px; margin:10px 0 5px; letter-spacing:-.8px; }
-h2 { font-size:17px; margin:0 0 15px; }
-h3 { font-size:13px; letter-spacing:1.2px; margin:0 0 12px; }
-p { line-height:1.5; }
+
+.app {
+  max-width:680px;
+  margin:auto;
+  padding:22px 17px;
+}
+
+header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:9px 0 28px;
+}
+
+.brand {
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:25px;
+  font-weight:500;
+  letter-spacing:3.5px;
+  color:#e4e4e1;
+}
+
+.tagline {
+  color:var(--gold);
+  font-size:8px;
+  letter-spacing:2.4px;
+  margin-top:7px;
+}
+
+.header-date {
+  font-size:10px;
+  color:var(--muted);
+  text-align:right;
+  letter-spacing:.4px;
+}
+
+h1 {
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:31px;
+  font-weight:400;
+  margin:13px 0 7px;
+  letter-spacing:-.5px;
+}
+
+h2 {
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;
+  font-weight:400;
+  margin:0 0 15px;
+}
+
+h3 {
+  font-size:11px;
+  font-weight:650;
+  letter-spacing:2px;
+  margin:0 0 14px;
+  color:#d5d4d0;
+}
+
+p { line-height:1.6; }
 .muted { color:var(--muted); }
-.small { font-size:12px; }
+.small { font-size:11px; }
+
 .card {
-  background:var(--panel);
+  background:linear-gradient(145deg,#181818,#111111);
   border:1px solid var(--line);
   border-radius:var(--radius);
-  padding:17px;
+  padding:18px;
   margin:13px 0;
+  box-shadow:0 8px 25px rgba(0,0,0,.13);
 }
+
 .hero {
-  background:linear-gradient(145deg,#242424,#171717 70%);
-  padding:20px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#242321 0%,#171717 48%,#101010 100%);
+  border:1px solid #45413a;
+  padding:23px 20px;
 }
-.hero-top { display:flex; justify-content:space-between; gap:12px; }
-.eyebrow { font-size:10px; letter-spacing:2px; color:var(--muted); }
-.year-number { font-size:39px; font-weight:800; margin-top:5px; }
-.total-number { font-size:24px; font-weight:750; }
-.progress-track { height:6px; background:#343434; border-radius:20px; overflow:hidden; margin:16px 0 8px; }
-.progress-fill { height:100%; width:0; background:#c7c7c7; border-radius:20px; transition:width .2s; }
-.progress-meta { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
-.section-title { display:flex; justify-content:space-between; align-items:center; margin:25px 2px 9px; }
-.section-title span { font-size:10px; color:var(--muted); letter-spacing:1.8px; }
+
+.hero:after {
+  content:"";
+  position:absolute;
+  width:155px;
+  height:155px;
+  right:-65px;
+  top:-75px;
+  border:1px solid rgba(182,155,103,.15);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.hero-top {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  position:relative;
+  z-index:1;
+}
+
+.eyebrow {
+  font-size:9px;
+  letter-spacing:2.3px;
+  color:var(--gold);
+}
+
+.year-number {
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:42px;
+  font-weight:400;
+  margin-top:7px;
+  letter-spacing:-1px;
+}
+
+.total-number {
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:28px;
+  font-weight:400;
+  color:#e4e2dc;
+}
+
+.progress-track {
+  height:4px;
+  background:#393735;
+  border-radius:20px;
+  overflow:hidden;
+  margin:19px 0 10px;
+}
+
+.progress-fill {
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#82765f,#d4c5a5);
+  border-radius:20px;
+  transition:width .2s;
+}
+
+.progress-meta {
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:.3px;
+}
+
+.section-title {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:29px 2px 10px;
+}
+
+.section-title span {
+  font-size:9px;
+  color:var(--gold);
+  letter-spacing:1.8px;
+}
+
 .habit-row {
-  display:flex; align-items:center; gap:12px;
-  padding:13px 0; border-bottom:1px solid #2a2a2a;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid #292929;
 }
+
 .habit-row:last-child { border-bottom:0; }
-.habit-icon { font-size:19px; width:27px; text-align:center; }
-.habit-name { flex:1; font-size:14px; }
-.habit-sub { display:block; color:var(--muted); font-size:10px; margin-top:4px; }
+
+.habit-icon {
+  font-size:18px;
+  width:27px;
+  text-align:center;
+  filter:saturate(.65);
+}
+
+.habit-name {
+  flex:1;
+  font-size:13px;
+  letter-spacing:.1px;
+}
+
+.habit-sub {
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:5px;
+}
+
 .check {
-  appearance:none; width:25px; height:25px; flex:none;
-  border:1px solid #555; border-radius:8px; background:transparent;
-  display:grid; place-items:center; margin:0;
+  appearance:none;
+  width:24px;
+  height:24px;
+  flex:none;
+  border:1px solid #66635d;
+  border-radius:50%;
+  background:transparent;
+  display:grid;
+  place-items:center;
+  margin:0;
+  transition:all .2s;
 }
-.check:checked { background:#d8d8d8; border-color:#d8d8d8; }
-.check:checked:after { content:"✓"; color:#111; font-weight:900; }
-.group-label { font-size:10px; letter-spacing:2px; color:var(--muted); margin-bottom:4px; }
-.weekly-row { display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid #2a2a2a; }
+
+.check:checked {
+  background:var(--gold);
+  border-color:var(--gold);
+}
+
+.check:checked:after {
+  content:"✓";
+  color:#111;
+  font-size:13px;
+  font-weight:900;
+}
+
+.group-label {
+  font-size:9px;
+  letter-spacing:2.5px;
+  color:var(--gold);
+  margin-bottom:5px;
+}
+
+.weekly-row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 0;
+  border-bottom:1px solid #292929;
+}
+
 .weekly-row:last-child { border:0; }
-.weekly-info { flex:1; font-size:14px; }
-.weekly-count { font-size:12px; color:var(--muted); }
+
+.weekly-info {
+  flex:1;
+  font-size:13px;
+}
+
+.weekly-count {
+  font-size:11px;
+  color:#d0c1a1;
+  letter-spacing:.5px;
+}
+
 .pill {
-  display:inline-block; border:1px solid var(--line); color:var(--muted);
-  border-radius:30px; padding:5px 9px; font-size:10px;
+  display:inline-block;
+  border:1px solid #5a5141;
+  color:#c3ae86;
+  border-radius:30px;
+  padding:5px 10px;
+  font-size:9px;
+  letter-spacing:1px;
 }
+
 .primary,.secondary,.danger {
-  border:0; border-radius:12px; padding:12px 15px; font-weight:700;
+  border:0;
+  border-radius:12px;
+  padding:13px 15px;
+  font-weight:650;
+  font-size:11px;
+  letter-spacing:1.1px;
+  transition:all .2s;
 }
-.primary { background:#e5e5e5; color:#111; }
-.secondary { background:#292929; color:var(--text); border:1px solid #3b3b3b; }
-.danger { background:#382323; color:#e8b4b4; }
+
+.primary {
+  background:linear-gradient(135deg,#d0c1a1,#a58d62);
+  color:#111;
+}
+
+.secondary {
+  background:#202020;
+  color:#e4e2dc;
+  border:1px solid #44413b;
+}
+
+.danger {
+  background:#382323;
+  color:#e8b4b4;
+}
+
 button:disabled { opacity:.4; }
 .full { width:100%; }
+
 input,select,textarea {
-  width:100%; background:#111; color:var(--text);
-  border:1px solid #393939; border-radius:11px;
-  padding:12px; outline:none; margin:6px 0 12px;
+  width:100%;
+  background:#101010;
+  color:var(--text);
+  border:1px solid #393939;
+  border-radius:11px;
+  padding:12px;
+  outline:none;
+  margin:6px 0 12px;
+  font-size:13px;
 }
-textarea { min-height:75px; resize:vertical; }
-label { font-size:11px; color:var(--muted); }
-.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
-.tabs { display:flex; gap:7px; overflow-x:auto; padding:3px 0 12px; }
+
+input:focus,select:focus,textarea:focus {
+  border-color:var(--gold);
+}
+
+textarea {
+  min-height:75px;
+  resize:vertical;
+}
+
+label {
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:.3px;
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.tabs {
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:3px 0 13px;
+  scrollbar-width:none;
+}
+
+.tabs::-webkit-scrollbar { display:none; }
+
 .tab {
-  background:#1c1c1c; color:var(--muted); border:1px solid var(--line);
-  border-radius:30px; padding:10px 15px; font-size:12px; white-space:nowrap;
+  background:#151515;
+  color:var(--muted);
+  border:1px solid #303030;
+  border-radius:30px;
+  padding:10px 15px;
+  font-size:10px;
+  letter-spacing:1px;
+  white-space:nowrap;
 }
-.tab.active { background:#e5e5e5; color:#111; border-color:#e5e5e5; font-weight:750; }
+
+.tab.active {
+  background:#d0c1a1;
+  color:#111;
+  border-color:#d0c1a1;
+  font-weight:750;
+}
+
 .page { display:none; }
 .page.active { display:block; }
-.day-selector { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; margin:15px 0; }
-.day-btn {
-  background:#202020; color:var(--muted); border:1px solid var(--line);
-  border-radius:10px; padding:10px 2px; font-size:10px;
+
+.day-selector {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+  margin:15px 0;
 }
-.day-btn.active { background:#e5e5e5; color:#111; font-weight:800; }
+
+.day-btn {
+  background:#1b1b1b;
+  color:var(--muted);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:11px 2px;
+  font-size:9px;
+}
+
+.day-btn.active {
+  background:var(--gold);
+  color:#111;
+  border-color:var(--gold);
+  font-weight:800;
+}
+
 .exercise {
-  border:1px solid var(--line); border-radius:13px; padding:13px; margin:9px 0;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:14px;
+  margin:9px 0;
   background:#151515;
 }
-.exercise-top { display:flex; justify-content:space-between; gap:10px; }
-.exercise-name { font-weight:700; font-size:14px; }
-.exercise-details { color:var(--muted); font-size:11px; line-height:1.7; margin-top:7px; }
-.exercise-actions { display:flex; gap:6px; }
-.mini-btn { border:1px solid var(--line); color:var(--muted); background:#202020; border-radius:8px; padding:6px 9px; font-size:10px; }
-.history-item { padding:12px 0; border-bottom:1px solid var(--line); }
+
+.exercise-top {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.exercise-name {
+  font-weight:650;
+  font-size:13px;
+}
+
+.exercise-details {
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.8;
+  margin-top:8px;
+}
+
+.exercise-actions {
+  display:flex;
+  gap:6px;
+}
+
+.mini-btn {
+  border:1px solid var(--line);
+  color:#c4c1b9;
+  background:#202020;
+  border-radius:8px;
+  padding:7px 9px;
+  font-size:9px;
+  letter-spacing:.5px;
+}
+
+.history-item {
+  padding:13px 0;
+  border-bottom:1px solid var(--line);
+}
+
 .history-item:last-child { border:0; }
-.goal-row { display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px solid var(--line); }
-.goal-row span { flex:1; font-size:13px; }
-.calendar-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; }
-.calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; }
-.calendar-day { aspect-ratio:1; display:grid; place-items:center; border-radius:8px; font-size:11px; color:var(--muted); background:#202020; }
+
+.goal-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.goal-row span {
+  flex:1;
+  font-size:12px;
+}
+
+.calendar-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.calendar-head strong {
+  font-size:11px;
+  letter-spacing:1.5px;
+  color:#d6c8aa;
+}
+
+.calendar-grid {
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.calendar-day {
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  border-radius:8px;
+  font-size:10px;
+  color:var(--muted);
+  background:#202020;
+}
+
 .calendar-day.empty { background:transparent; }
 .calendar-day.done { background:#34463a; color:#d3e5d7; }
 .calendar-day.missed { background:#503333; color:#f0caca; }
-.calendar-day.today { outline:1px solid #eee; outline-offset:1px; color:white; }
-.legend { display:flex; gap:14px; flex-wrap:wrap; font-size:10px; color:var(--muted); margin-top:13px; }
-.dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px; }
-.notice { border-left:3px solid var(--gold); padding:12px; background:#24211b; border-radius:8px; margin:12px 0; }
-.notice strong { font-size:12px; }
-.notice p { color:#c5c0b5; font-size:12px; margin:7px 0 0; }
-.duo-status { display:flex; justify-content:space-between; gap:10px; padding:10px 0; border-bottom:1px solid var(--line); font-size:12px; }
+
+.calendar-day.today {
+  outline:1px solid var(--gold);
+  outline-offset:1px;
+  color:white;
+}
+
+.legend {
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  font-size:9px;
+  color:var(--muted);
+  margin-top:15px;
+}
+
+.dot {
+  display:inline-block;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  margin-right:5px;
+}
+
+.notice {
+  border-left:2px solid var(--gold);
+  padding:13px;
+  background:#211e18;
+  border-radius:8px;
+  margin:13px 0;
+}
+
+.notice strong {
+  font-size:11px;
+  letter-spacing:.5px;
+  color:#d5c29c;
+}
+
+.notice p {
+  color:#c5c0b5;
+  font-size:11px;
+  margin:8px 0 0;
+}
+
+.duo-status {
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+  font-size:11px;
+}
+
 .status-wait { color:var(--muted); }
 .status-done { color:#b9d3be; }
-.empty { color:var(--muted); font-size:12px; text-align:center; padding:22px 8px; }
+
+.empty {
+  color:var(--muted);
+  font-size:11px;
+  text-align:center;
+  padding:24px 8px;
+}
+
 .nav {
-  position:fixed; bottom:0; left:0; right:0; z-index:5;
-  display:flex; justify-content:center; gap:5px;
-  background:rgba(16,16,16,.96); border-top:1px solid var(--line);
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:5;
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  background:rgba(10,10,10,.96);
+  border-top:1px solid #303030;
   padding:10px 7px calc(10px + env(safe-area-inset-bottom));
-  backdrop-filter:blur(15px);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 }
+
 .nav button {
-  flex:1; max-width:130px; border:0; background:transparent; color:var(--muted);
-  font-size:10px; padding:8px 2px; border-radius:10px;
+  flex:1;
+  max-width:130px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.7px;
+  padding:8px 2px;
+  border-radius:10px;
 }
-.nav button.active { background:#242424; color:white; }
-.nav-icon { display:block; font-size:17px; margin-bottom:4px; }
-hr { border:0; border-top:1px solid var(--line); margin:17px 0; }
-@media(min-width:600px) { .app { padding:25px; } }
+
+.nav button.active {
+  background:#24221e;
+  color:#d5c29c;
+}
+
+.nav-icon {
+  display:block;
+  font-size:17px;
+  margin-bottom:4px;
+}
+
+hr {
+  border:0;
+  border-top:1px solid var(--line);
+  margin:18px 0;
+}
+
+@media(min-width:600px) {
+  .app { padding:28px; }
+}
 </style>
-</head>
-
-<body>
-<div class="app">
-<header>
-  <div>
-    <div class="brand">YEARS ARC</div>
-    <div class="tagline">365 DAYS. ONE VERSION BETTER.</div>
-  </div>
-  <div class="header-date" id="headerDate"></div>
-</header>
-
-<div class="tabs">
-  <button class="tab active" data-page="home">ACCUEIL</button>
-  <button class="tab" data-page="sport">SPORT</button>
-  <button class="tab" data-page="glow">GLOW UP</button>
-  <button class="tab" data-page="stats">STATS</button>
-</div>
-
-<!-- ACCUEIL -->
-<section class="page active" id="home">
-  <div class="hero card">
-    <div class="hero-top">
-      <div>
-        <div class="eyebrow">TON PARCOURS</div>
-        <div class="year-number" id="yearNumber">ANNÉE 1</div>
-        <div class="muted small" id="yearDates">Ton premier jour commence ici.</div>
-      </div>
-      <div style="text-align:right">
-        <div class="eyebrow">JOURS CUMULÉS</div>
-        <div class="total-number" id="totalDays">0</div>
-      </div>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="yearProgress"></div></div>
-    <div class="progress-meta">
-      <span id="yearProgressText">0 / 365 jours</span>
-      <span id="yearPercent">0 %</span>
-    </div>
-  </div>
-
-  <div id="noticeArea"></div>
-
-  <div class="card">
-    <div class="group-label">DUO</div>
-    <h2 style="margin-top:7px">DON'T BREAK THE ARC. 🔥</h2>
-    <p class="muted small">Le mode DUO permet de suivre vos validations et votre flamme à deux. La connexion entre deux téléphones n'est pas encore configurée.</p>
-    <div class="duo-status"><span>Ton statut</span><span class="status-wait" id="myDuoStatus">Pas encore validé</span></div>
-    <div class="duo-status"><span>Partenaire</span><span class="status-wait">Connexion non configurée</span></div>
-    <div style="margin-top:13px"><span class="pill">DUO EN ATTENTE DE CONFIGURATION</span></div>
-  </div>
-
-  <div class="section-title"><h2>TES HABITUDES</h2><span id="todayLabel"></span></div>
-  <div class="card">
-    <div class="group-label">LES INTERDITS</div>
-    <div id="forbiddenHabits"></div>
-  </div>
-  <div class="card">
-    <div class="group-label">LE TAF</div>
-    <div id="workHabits"></div>
-    <hr>
-    <div class="group-label">OBJECTIFS HEBDOMADAIRES</div>
-    <div id="weeklyHabits"></div>
-  </div>
-  <div class="card">
-    <div class="group-label">LA MACHINE</div>
-    <div id="machineHabits"></div>
-  </div>
-  <button class="primary full" id="validateDay">VALIDER MA JOURNÉE</button>
-  <p class="muted small" id="validationMessage" style="text-align:center"></p>
-</section>
-
-<!-- SPORT -->
-<section class="page" id="sport">
-  <h1>SPORT.</h1>
-  <p class="muted small">Construis tes séances, garde une trace de tes performances.</p>
-  <div class="card">
-    <h3>TON PROGRAMME</h3>
-    <div class="form-grid">
-      <button class="secondary" id="fixedMode">PROGRAMME FIXE</button>
-      <button class="secondary" id="freeMode">LIBRE CHAQUE SEMAINE</button>
-    </div>
-    <p class="muted small" id="sportModeText"></p>
-  </div>
-  <div class="card">
-    <h3>CHOISIS TON JOUR</h3>
-    <div class="day-selector" id="sportDays"></div>
-    <div class="eyebrow" id="workoutDateLabel"></div>
-    <div id="workoutExercises"></div>
-    <button class="secondary full" id="addExercise">+ AJOUTER UN EXERCICE</button>
-    <button class="primary full" style="margin-top:9px" id="saveWorkout">ENREGISTRER LA SÉANCE</button>
-  </div>
-  <div class="card" id="exerciseForm" style="display:none">
-    <h3 id="exerciseFormTitle">AJOUTER UN EXERCICE</h3>
-    <label>Nom de l'exercice ou machine</label>
-    <input id="exName" placeholder="Ex : Développé couché">
-    <div class="form-grid">
-      <div><label>Séries</label><input id="exSets" type="number" min="1" value="3"></div>
-      <div><label>Répétitions</label><input id="exReps" placeholder="Ex : 12"></div>
-      <div><label>Charge (kg)</label><input id="exWeight" type="number" min="0" step="0.5" placeholder="Ex : 40"></div>
-      <div><label>Repos (secondes)</label><input id="exRest" type="number" min="0" value="90"></div>
-    </div>
-    <label>Notes personnelles</label>
-    <textarea id="exNotes" placeholder="Technique, sensations, progression..."></textarea>
-    <button class="primary full" id="confirmExercise">ENREGISTRER L'EXERCICE</button>
-    <button class="secondary full" style="margin-top:7px" id="cancelExercise">ANNULER</button>
-  </div>
-  <div class="card">
-    <h3>HISTORIQUE DES SÉANCES</h3>
-    <div id="workoutHistory"></div>
-  </div>
-</section>
-
-<!-- GLOW UP -->
-<section class="page" id="glow">
-  <h1>GLOW UP.</h1>
-  <p class="muted small">Tes objectifs. Ton évolution. À ton rythme.</p>
-  <div class="card">
-    <h3>MES OBJECTIFS</h3>
-    <div id="goalsList"></div>
-    <hr>
-    <label>Ajouter un objectif</label>
-    <input id="goalInput" placeholder="Ex : Lire 20 minutes par jour">
-    <button class="primary full" id="addGoal">AJOUTER L'OBJECTIF</button>
-  </div>
-  <div class="card">
-    <h3>GRATITUDE</h3>
-    <p class="muted small">Note une chose positive de ta journée.</p>
-    <textarea id="gratitudeInput" placeholder="Aujourd'hui, je suis reconnaissant(e) pour..."></textarea>
-    <button class="secondary full" id="saveGratitude">ENREGISTRER</button>
-    <p class="muted small" id="gratitudeSaved"></p>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="page" id="stats">
-  <h1>STATISTIQUES.</h1>
-  <p class="muted small">Regarde le chemin parcouru. Continue d'avancer.</p>
-  <div class="card">
-    <div class="eyebrow">PROGRESSION GLOBALE</div>
-    <div class="total-number" id="statsTotal">0 jours</div>
-    <p class="muted small" id="statsStart"></p>
-    <hr>
-    <div class="eyebrow">AVERTISSEMENTS CE MOIS-CI</div>
-    <div class="total-number" id="warningCount">0 / 2</div>
-    <p class="muted small">Au troisième jour manqué dans le mois, ta progression annuelle actuelle repart de zéro. Tes jours cumulés sont conservés.</p>
-  </div>
-  <div class="card">
-    <div class="calendar-head">
-      <button class="mini-btn" id="prevMonth">←</button>
-      <strong id="calendarTitle"></strong>
-      <button class="mini-btn" id="nextMonth">→</button>
-    </div>
-    <div class="calendar-grid" id="calendarWeekdays"></div>
-    <div class="calendar-grid" id="calendarGrid"></div>
-    <div class="legend">
-      <span><i class="dot" style="background:#66816d"></i>Validée</span>
-      <span><i class="dot" style="background:#885656"></i>Manquée</span>
-      <span><i class="dot" style="background:#eee"></i>Aujourd'hui</span>
-    </div>
-  </div>
-  <div class="card">
-    <h3>TES ANNÉES YEARS ARC</h3>
-    <div id="yearHistory"></div>
-  </div>
-</section>
-</div>
-
-<nav class="nav">
-  <button class="active" data-page="home"><span class="nav-icon">⌂</span>ACCUEIL</button>
-  <button data-page="sport"><span class="nav-icon">↗</span>SPORT</button>
-  <button data-page="glow"><span class="nav-icon">✦</span>GLOW UP</button>
-  <button data-page="stats"><span class="nav-icon">▦</span>STATS</button>
-</nav>
-
-<script>
-"use strict";
-
-/* YEARS ARC — données personnelles stockées sur cet appareil */
-
-const STORAGE_KEY = "yearsArcData_v1";
-const DAY_MS = 86400000;
-const HABITS = [
-  {id:"water",name:"Que de l'eau",icon:"💧",group:"forbidden"},
-  {id:"fastfood",name:"Zéro fast food",icon:"🍔",group:"forbidden"},
-  {id:"phone",name:"Zéro téléphone en mangeant",icon:"📵",group:"forbidden"},
-  {id:"outside",name:"20 min dehors",icon:"🌳",group:"work"},
-  {id:"gratitude",name:"Gratitude",icon:"📝",group:"work"},
-  {id:"steps",name:"10k pas",icon:"👟",group:"machine"},
-  {id:"sleep",name:"7-8h de sommeil",icon:"🌙",group:"machine"}
-];
-const WEEKLY = [
-  {id:"gym",name:"Salle",icon:"🏋️",target:5},
-  {id:"run",name:"Courir",icon:"🏃",target:2}
-];
-const DAYS = ["LUN","MAR","MER","JEU","VEN","SAM","DIM"];
-const MONTHS = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
-
-function localDate(d=new Date()) {
-  return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
-}
-function parseDate(s) {
-  const [y,m,d]=s.split("-").map(Number);
-  return new Date(y,m-1,d,12,0,0);
-}
-function addDays(s,n) {
-  const d=parseDate(s); d.setDate(d.getDate()+n); return localDate(d);
-}
-function diffDays(a,b) {
-  return Math.round((parseDate(b)-parseDate(a))/DAY_MS);
-}
-function monthKey(s) { return s.slice(0,7); }
-function weekStart(s) {
-  const d=parseDate(s);
-  const day=(d.getDay()+6)%7;
-  d.setDate(d.getDate()-day);
-  return localDate(d);
-}
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
-}
-function defaultData() {
-  const today=localDate();
-  return {
-    startDate:today,
-    lastProcessedDate:today,
-    habits:{},
-    weekly:{},
-    missedDays:[],
-    validatedDays:[],
-    warnings:{},
-    resetStarts:{},
-    goals:[],
-    gratitude:{},
-    sportMode:"fixed",
-    workouts:{},
-    templates:{}
-  };
-}
-let data;
-try {
-  data=JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultData();
-} catch(e) {
-  data=defaultData();
-}
-function save() {
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
-}
-function ensureDay(date) {
-  if(!data.habits[date]) data.habits[date]={};
-  if(!data.weekly[date]) data.weekly[date]={};
-}
-function currentYearInfo(date=localDate()) {
-  const elapsed=Math.max(0,diffDays(data.startDate,date));
-  const year=Math.floor(elapsed/365)+1;
-  const yearStart=addDays(data.startDate,(year-1)*365);
-  const yearEnd=addDays(yearStart,364);
-  const resetStart=data.resetStarts[year] || yearStart;
-  const effectiveStart=diffDays(resetStart,yearStart)>0 ? resetStart : yearStart;
-  const progress=Math.max(0,diffDays(effectiveStart,date)+1);
-  return {year,yearStart,yearEnd,progress:Math.min(progress,365),total:elapsed+1};
-}
-function warningCount(date=localDate()) {
-  return data.warnings[monthKey(date)] || 0;
-}
-function addMissedDay(date) {
-  if(data.missedDays.includes(date) || data.validatedDays.includes(date)) return;
-  data.missedDays.push(date);
-  const month=monthKey(date);
-  data.warnings[month]=(data.warnings[month]||0)+1;
-  const count=data.warnings[month];
-  const info=currentYearInfo(date);
-  if(count>=3) {
-    data.resetStarts[info.year]=addDays(date,1);
-    data.notices=data.notices||{};
-    data.notices[date]="reset";
-  } else {
-    data.notices=data.notices||{};
-    data.notices[date]=count;
-  }
-}
-function processPastDays() {
-  const today=localDate();
-  let cursor=data.lastProcessedDate || today;
-  if(diffDays(cursor,today)>0) cursor=today;
-  let next=addDays(cursor,1);
-  while(diffDays(next,today)>0) {
-    if(!data.validatedDays.includes(next)) addMissedDay(next);
-    next=addDays(next,1);
-  }
-  data.lastProcessedDate=today;
-  ensureDay(today);
-  save();
-}
-function dayComplete(date) {
-  const h=data.habits[date]||{};
-  return HABITS.every(item=>h[item.id]===true);
-}
-function weeklyCount(id,date=localDate()) {
-  const start=weekStart(date);
-  let count=0;
-  for(let i=0;i<7;i++) {
-    const d=addDays(start,i);
-    if(data.weekly[d]?.[id]) count++;
-  }
-  return count;
-}
-
-/* Navigation */
-function showPage(page) {
-  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===page));
-  document.querySelectorAll("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  if(page==="sport") renderSport();
-  if(page==="stats") renderStats();
-}
-document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
-
-/* Accueil et habitudes */
-function renderHabitGroup(containerId,group) {
-  const el=document.getElementById(containerId);
-  el.innerHTML="";
-  const today=localDate();
-  HABITS.filter(h=>h.group===group).forEach(h=>{
-    const row=document.createElement("div");
-    row.className="habit-row";
-    const checked=!!data.habits[today]?.[h.id];
-    row.innerHTML=`
-      <span class="habit-icon">${h.icon}</span>
-      <span class="habit-name">${escapeHTML(h.name)}</span>
-      <input class="check" type="checkbox" aria-label="${escapeHTML(h.name)}" ${checked?"checked":""}>
-    `;
-    row.querySelector("input").addEventListener("change",e=>{
-      ensureDay(today);
-      data.habits[today][h.id]=e.target.checked;
-      data.validatedDays=data.validatedDays.filter(d=>d!==today);
-      save();
-      renderHome();
-    });
-    el.appendChild(row);
-  });
-}
-function renderWeekly() {
-  const el=document.getElementById("weeklyHabits");
-  el.innerHTML="";
-  const today=localDate();
-  WEEKLY.forEach(item=>{
-    const count=weeklyCount(item.id,today);
-    const row=document.createElement("div");
-    row.className="weekly-row";
-    const checked=!!data.weekly[today]?.[item.id];
-    row.innerHTML=`
-      <span class="habit-icon">${item.icon}</span>
-      <span class="weekly-info">${item.name}<span class="habit-sub">Objectif : ${item.target} fois par semaine</span></span>
-      <span class="weekly-count">${count}/${item.target}</span>
-      <input class="check" type="checkbox" aria-label="${item.name}" ${checked?"checked":""}>
-    `;
-    row.querySelector("input").addEventListener("change",e=>{
-      ensureDay(today);
-      data.weekly[today][item.id]=e.target.checked;
-      save();
-      renderWeekly();
-    });
-    el.appendChild(row);
-  });
-}
-function renderNotice() {
-  const area=document.getElementById("noticeArea");
-  area.innerHTML="";
-  const today=localDate();
-  const month=monthKey(today);
-  const count=warningCount(today);
-  const latest=Object.keys(data.notices||{}).sort().reverse().find(d=>d.slice(0,7)===month);
-  if(latest) {
-    const type=data.notices[latest];
-    let title="",message="";
-    if(type===1) {
-      title="AVERTISSEMENT 1/2 — UNE JOURNÉE PERDUE";
-      message="Tu as manqué une journée de ton Years Arc. Ce n'est pas encore un échec. Tu as droit à deux avertissements par mois. Ne laisse pas une journée devenir une mauvaise habitude. Reprends le contrôle dès aujourd'hui.";
-    } else if(type===2) {
-      title="AVERTISSEMENT 2/2 — DERNIÈRE CHANCE";
-      message="Tu as manqué une deuxième journée ce mois-ci. Tu as utilisé tes deux avertissements. La prochaine journée ratée remettra ta progression annuelle actuelle à zéro. Ne lâche rien maintenant.";
-    } else {
-      title="PROGRESSION RÉINITIALISÉE — TU REPARTS DE ZÉRO";
-      message="Tu as dépassé tes deux avertissements du mois. Ta progression annuelle actuelle a été réinitialisée. Tes années précédentes et tes jours cumulés sont conservés. C'est à toi de reconstruire.";
-    }
-    area.innerHTML=`<div class="notice"><strong>${title}</strong><p>${message}</p></div>`;
-  } else if(count===0 && today.slice(8)==="01") {
-    area.innerHTML=`<div class="notice"><strong>NOUVEAU MOIS — UNE NOUVELLE CHANCE</strong><p>Tes deux avertissements sont de nouveau disponibles. Tire les leçons du mois précédent et continue ton Years Arc.</p></div>`;
-  }
-}
-function renderHome() {
-  const today=localDate();
-  const info=currentYearInfo(today);
-  document.getElementById("headerDate").textContent=parseDate(today).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"});
-  document.getElementById("todayLabel").textContent=parseDate(today).toLocaleDateString("fr-FR",{day:"numeric",month:"long"}).toUpperCase();
-  document.getElementById("yearNumber").textContent="ANNÉE "+info.year;
-  document.getElementById("yearDates").textContent="Du "+parseDate(info.yearStart).toLocaleDateString("fr-FR")+" au "+parseDate(info.yearEnd).toLocaleDateString("fr-FR");
-  document.getElementById("totalDays").textContent=info.total;
-  document.getElementById("yearProgress").style.width=(info.progress/365*100)+"%";
-  document.getElementById("yearProgressText").textContent=info.progress+" / 365 jours";
-  document.getElementById("yearPercent").textContent=Math.round(info.progress/365*100)+" %";
-  renderHabitGroup("forbiddenHabits","forbidden");
-  renderHabitGroup("workHabits","work");
-  renderHabitGroup("machineHabits","machine");
-  renderWeekly();
-  renderNotice();
-  const complete=dayComplete(today);
-  const validated=data.validatedDays.includes(today);
-  const button=document.getElementById("validateDay");
-  button.disabled=validated;
-  button.textContent=validated?"JOURNÉE VALIDÉE ✓":"VALIDER MA JOURNÉE";
-  document.getElementById("validationMessage").textContent=validated
-    ?"Ta journée est enregistrée. Reviens demain."
-    :complete?"Toutes tes habitudes sont cochées. Tu peux valider ta journée."
-    :"Coche tes 7 habitudes quotidiennes pour valider ta journée.";
-  document.getElementById("myDuoStatus").textContent=validated?"Journée validée":"Pas encore validé";
-  document.getElementById("myDuoStatus").className=validated?"status-done":"status-wait";
-}
-document.getElementById("validateDay").addEventListener("click",()=>{
-  const today=localDate();
-  if(!dayComplete(today)) {
-    alert("Il te reste des habitudes à cocher avant de valider ta journée.");
-    return;
-  }
-  if(!data.validatedDays.includes(today)) data.validatedDays.push(today);
-  save();
-  renderHome();
-});
-
-/* SPORT */
-let selectedDay=0;
-let editingIndex=-1;
-function workoutDateForSelectedDay() {
-  const start=weekStart(localDate());
-  return addDays(start,selectedDay);
-}
-function workoutKey(date) {
-  if(data.sportMode==="fixed") return "fixed-"+selectedDay;
-  return "free-"+date;
-}
-function getWorkout(date) {
-  const key=workoutKey(date);
-  const source=data.sportMode==="fixed"?data.templates:data.workouts;
-  return source[key] || [];
-}
-function setWorkout(date,list) {
-  const key=workoutKey(date);
-  if(data.sportMode==="fixed") data.templates[key]=list;
-  else data.workouts[key]=list;
-}
-function renderSport() {
-  document.getElementById("sportModeText").textContent=data.sportMode==="fixed"
-    ?"Ton programme se répète chaque semaine. Tu peux modifier chaque journée quand tu le souhaites."
-    :"Chaque semaine est libre. Les séances enregistrées restent dans ton historique.";
-  document.getElementById("fixedMode").classList.toggle("primary",data.sportMode==="fixed");
-  document.getElementById("freeMode").classList.toggle("primary",data.sportMode==="free");
-  const days=document.getElementById("sportDays");
-  days.innerHTML="";
-  DAYS.forEach((day,i)=>{
-    const b=document.createElement("button");
-    b.className="day-btn"+(selectedDay===i?" active":"");
-    b.textContent=day;
-    b.addEventListener("click",()=>{selectedDay=i;renderSport();});
-    days.appendChild(b);
-  });
-  const date=workoutDateForSelectedDay();
-  document.getElementById("workoutDateLabel").textContent=parseDate(date).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"}).toUpperCase();
-  const exercises=getWorkout(date);
-  const list=document.getElementById("workoutExercises");
-  list.innerHTML="";
-  if(!exercises.length) list.innerHTML='<div class="empty">Aucun exercice prévu pour cette journée.</div>';
-  exercises.forEach((ex,i)=>{
-    const el=document.createElement("div");
-    el.className="exercise";
-    el.innerHTML=`
-      <div class="exercise-top">
-        <div class="exercise-name">${escapeHTML(ex.name)}</div>
-        <div class="exercise-actions">
-          <button class="mini-btn" data-edit="${i}">MODIFIER</button>
-          <button class="mini-btn" data-delete="${i}">×</button>
-        </div>
-      </div>
-      <div class="exercise-details">${escapeHTML(ex.sets)} séries · ${escapeHTML(ex.reps)} répétitions · ${escapeHTML(ex.weight||"—")} kg · Repos ${escapeHTML(ex.rest)} sec
-      ${ex.notes?'<br>'+escapeHTML(ex.notes):""}</div>`;
-    el.querySelector("[data-edit]").addEventListener("click",()=>openExerciseForm(i));
-    el.querySelector("[data-delete]").addEventListener("click",()=>{
-      if(confirm("Supprimer cet exercice ?")) {
-        const copy=[...getWorkout(date)];
-        copy.splice(i,1);setWorkout(date,copy);save();renderSport();
-      }
-    });
-    list.appendChild(el);
-  });
-  renderWorkoutHistory();
-}
-document.getElementById("fixedMode").addEventListener("click",()=>{
-  data.sportMode="fixed";save();renderSport();
-});
-document.getElementById("freeMode").addEventListener("click",()=>{
-  data.sportMode="free";save();renderSport();
-});
-function openExerciseForm(index=-1) {
-  editingIndex=index;
-  const ex=index>=0?getWorkout(workoutDateForSelectedDay())[index]:null;
-  document.getElementById("exerciseForm").style.display="block";
-  document.getElementById("exerciseFormTitle").textContent=ex?"MODIFIER L'EXERCICE":"AJOUTER UN EXERCICE";
-  document.getElementById("exName").value=ex?.name||"";
-  document.getElementById("exSets").value=ex?.sets||3;
-  document.getElementById("exReps").value=ex?.reps||"";
-  document.getElementById("exWeight").value=ex?.weight||"";
-  document.getElementById("exRest").value=ex?.rest??90;
-  document.getElementById("exNotes").value=ex?.notes||"";
-  document.getElementById("exName").focus();
-}
-document.getElementById("addExercise").addEventListener("click",()=>openExerciseForm());
-document.getElementById("cancelExercise").addEventListener("click",()=>{
-  document.getElementById("exerciseForm").style.display="none";
-});
-document.getElementById("confirmExercise").addEventListener("click",()=>{
-  const name=document.getElementById("exName").value.trim();
-  if(!name) { alert("Ajoute le nom de ton exercice.");return; }
-  const ex={
-    name,
-    sets:Math.max(1,Number(document.getElementById("exSets").value)||1),
-    reps:document.getElementById("exReps").value.trim(),
-    weight:document.getElementById("exWeight").value,
-    rest:document.getElementById("exRest").value,
-    notes:document.getElementById("exNotes").value.trim()
-  };
-  const date=workoutDateForSelectedDay();
-  const list=[...getWorkout(date)];
-  if(editingIndex>=0) list[editingIndex]=ex; else list.push(ex);
-  setWorkout(date,list);
-  save();
-  document.getElementById("exerciseForm").style.display="none";
-  renderSport();
-});
-document.getElementById("saveWorkout").addEventListener("click",()=>{
-  const date=workoutDateForSelectedDay();
-  const exercises=getWorkout(date);
-  if(!exercises.length) { alert("Ajoute au moins un exercice avant d'enregistrer.");return; }
-  if(data.sportMode==="free") {
-    data.workouts["free-"+date]=exercises;
-  } else {
-    data.templates["fixed-"+selectedDay]=exercises;
-  }
-  data.history=data.history||{};
-  data.history[date]=JSON.parse(JSON.stringify(exercises));
-  save();
-  renderWorkoutHistory();
-  alert("Séance enregistrée.");
-});
-function renderWorkoutHistory() {
-  const el=document.getElementById("workoutHistory");
-  const history=data.history||{};
-  const dates=Object.keys(history).sort().reverse();
-  if(!dates.length) { el.innerHTML='<div class="empty">Tes séances enregistrées apparaîtront ici.</div>';return; }
-  el.innerHTML=dates.slice(0,20).map(date=>`
-    <div class="history-item">
-      <strong style="font-size:12px">${parseDate(date).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"})}</strong>
-      <div class="muted small" style="margin-top:5px">${history[date].map(x=>escapeHTML(x.name)).join(" · ")}</div>
-    </div>`).join("");
-}
-
-/* GLOW UP : objectifs et gratitude */
-function renderGoals() {
-  const el=document.getElementById("goalsList");
-  if(!data.goals.length) {
-    el.innerHTML='<div class="empty">Aucun objectif pour le moment. Ajoute ton premier objectif.</div>';
-    return;
-  }
-  el.innerHTML="";
-  data.goals.forEach((goal,i)=>{
-    const row=document.createElement("div");
-    row.className="goal-row";
-    row.innerHTML=`<span>${escapeHTML(goal)}</span><button class="mini-btn">SUPPRIMER</button>`;
-    row.querySelector("button").addEventListener("click",()=>{
-      data.goals.splice(i,1);save();renderGoals();
-    });
-    el.appendChild(row);
-  });
-}
-document.getElementById("addGoal").addEventListener("click",()=>{
-  const input=document.getElementById("goalInput");
-  const value=input.value.trim();
-  if(!value) return;
-  data.goals.push(value);input.value="";save();renderGoals();
-});
-function renderGratitude() {
-  const today=localDate();
-  document.getElementById("gratitudeInput").value=data.gratitude[today]||"";
-}
-document.getElementById("saveGratitude").addEventListener("click",()=>{
-  data.gratitude[localDate()]=document.getElementById("gratitudeInput").value.trim();
-  save();
-  document.getElementById("gratitudeSaved").textContent="Enregistré pour aujourd'hui.";
-});
-
-/* STATS ET CALENDRIER */
-let calendarDate=new Date();
-function renderStats() {
-  const today=localDate();
-  const info=currentYearInfo(today);
-  document.getElementById("statsTotal").textContent=info.total+" jours";
-  document.getElementById("statsStart").textContent="Début de ton parcours : "+parseDate(data.startDate).toLocaleDateString("fr-FR");
-  document.getElementById("warningCount").textContent=warningCount(today)+" / 2";
-  renderCalendar();
-  renderYearHistory();
-}
-function renderCalendar() {
-  const y=calendarDate.getFullYear(),m=calendarDate.getMonth();
-  document.getElementById("calendarTitle").textContent=MONTHS[m].toUpperCase()+" "+y;
-  const weekdays=document.getElementById("calendarWeekdays");
-  weekdays.innerHTML=DAYS.map(d=>`<div class="muted" style="text-align:center;font-size:9px;padding:5px">${d}</div>`).join("");
-  const grid=document.getElementById("calendarGrid");
-  grid.innerHTML="";
-  const first=new Date(y,m,1,12);
-  const offset=(first.getDay()+6)%7;
-  const count=new Date(y,m+1,0).getDate();
-  for(let i=0;i<offset;i++) {
-    const blank=document.createElement("div");blank.className="calendar-day empty";grid.appendChild(blank);
-  }
-  for(let day=1;day<=count;day++) {
-    const date=localDate(new Date(y,m,day,12));
-    const cell=document.createElement("div");
-    cell.className="calendar-day";
-    cell.textContent=day;
-    if(data.validatedDays.includes(date)) cell.classList.add("done");
-    else if(data.missedDays.includes(date)) cell.classList.add("missed");
-    if(date===localDate()) cell.classList.add("today");
-    grid.appendChild(cell);
-  }
-}
-document.getElementById("prevMonth").addEventListener("click",()=>{
-  calendarDate.setMonth(calendarDate.getMonth()-1);renderCalendar();
-});
-document.getElementById("nextMonth").addEventListener("click",()=>{
-  calendarDate.setMonth(calendarDate.getMonth()+1);renderCalendar();
-});
-function renderYearHistory() {
-  const el=document.getElementById("yearHistory");
-  const info=currentYearInfo();
-  let html="";
-  for(let year=info.year;year>=1;year--) {
-    const start=addDays(data.startDate,(year-1)*365);
-    const end=addDays(start,364);
-    const isCurrent=year===info.year;
-    const days=isCurrent?info.progress:365;
-    html+=`<div class="history-item">
-      <strong style="font-size:13px">ANNÉE ${year} ${isCurrent?'<span class="pill">EN COURS</span>':""}</strong>
-      <div class="muted small" style="margin-top:5px">${parseDate(start).toLocaleDateString("fr-FR")} — ${parseDate(end).toLocaleDateString("fr-FR")}</div>
-      <div class="muted small">${days} jours de progression affichés</div>
-    </div>`;
-  }
-  el.innerHTML=html;
-}
-
-/* Démarrage */
-processPastDays();
-renderHome();
-renderGoals();
-renderGratitude();
-renderSport();
-renderStats();
-</script>
-</body>
-</html>
