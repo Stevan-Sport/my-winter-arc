@@ -2082,6 +2082,8 @@ function renderStats() {
   document.getElementById("warningCount").textContent=warningCount(today)+" / 2";
   renderCalendar();
   renderYearHistory();
+  checkAchievements();
+renderAchievements();
 }
 function renderCalendar() {
   const y=calendarDate.getFullYear(),m=calendarDate.getMonth();
