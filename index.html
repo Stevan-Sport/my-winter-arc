@@ -1353,6 +1353,7 @@ document.getElementById("validateDay").addEventListener("click",()=>{
   }
   if(!data.validatedDays.includes(today)) data.validatedDays.push(today);
   save();
+  checkAchievements();
   renderHome();
 });
 
