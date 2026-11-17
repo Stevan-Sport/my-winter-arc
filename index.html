@@ -1773,7 +1773,8 @@ function finishActiveWorkout() {
   });
 
   save();
-
+  checkAchievements();
+  
   document.getElementById("sessionPhase").textContent = "SÉANCE TERMINÉE";
   document.getElementById("sessionTimer").textContent = "✓";
   document.getElementById("sessionExercise").textContent = "BRAVO.";
