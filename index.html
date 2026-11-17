@@ -556,6 +556,17 @@ label {
   color: var(--gold);
 }
 
+/* NAVIGATION QUI SE MASQUE AU SCROLL */
+.nav {
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+
+.nav.nav-hidden {
+  transform: translateY(110%);
+  pointer-events: none;
+}
+
 .nav-icon {
   display: block;
   font-size: 17px;
