@@ -1272,6 +1272,291 @@ function renderWorkoutHistory() {
     </div>`).join("");
 }
 
+/* MODE SÉANCE — MINUTEUR ET ENCHAÎNEMENT */
+
+let activeWorkout = null;
+let workoutInterval = null;
+
+function startWorkout() {
+  if (activeWorkout && !activeWorkout.finished) {
+    alert("Une séance est déjà en cours.");
+    return;
+  }
+
+  const date = workoutDateForSelectedDay();
+  const exercises = JSON.parse(JSON.stringify(getWorkout(date)));
+
+  if (!exercises.length) {
+    alert("Ajoute au moins un exercice avant de commencer.");
+    return;
+  }
+
+  activeWorkout = {
+    date,
+    exercises,
+    exerciseIndex: 0,
+    setIndex: 1,
+    completedSets: 0,
+    phase: "countdown",
+    remaining: 3,
+    pausedPhase: null,
+    startedAt: Date.now(),
+    finished: false
+  };
+
+  document.getElementById("activeSession").style.display = "block";
+  document.getElementById("activeSession").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+
+  renderActiveSession();
+  startWorkoutInterval();
+}
+
+function startWorkoutInterval() {
+  clearInterval(workoutInterval);
+
+  workoutInterval = setInterval(() => {
+    if (!activeWorkout || activeWorkout.finished) {
+      clearInterval(workoutInterval);
+      return;
+    }
+
+    activeWorkout.remaining--;
+
+    if (activeWorkout.remaining <= 0) {
+      activeWorkout.remaining = 0;
+      activeWorkout.phase = "exercise";
+      clearInterval(workoutInterval);
+    }
+
+    renderActiveSession();
+  }, 1000);
+}
+
+function renderActiveSession() {
+  if (!activeWorkout) return;
+
+  const session = activeWorkout;
+  const panel = document.getElementById("activeSession");
+  const actions = document.getElementById("sessionActions");
+
+  panel.style.display = "block";
+
+  if (session.finished) return;
+
+  const exercise = session.exercises[session.exerciseIndex];
+  const totalSets = Number(exercise.sets) || 1;
+  const totalExercises = session.exercises.length;
+
+  document.getElementById("sessionExercise").textContent = exercise.name;
+  document.getElementById("sessionPosition").textContent =
+    "EXERCICE " + (session.exerciseIndex + 1) + " / " + totalExercises;
+
+  document.getElementById("sessionWeight").textContent =
+    exercise.weight !== "" ? exercise.weight : "—";
+
+  document.getElementById("sessionReps").textContent =
+    exercise.reps || "—";
+
+  document.getElementById("sessionSets").textContent =
+    session.setIndex + " / " + totalSets;
+
+  const progress =
+    ((session.exerciseIndex + (session.setIndex - 1) / totalSets)
+    / totalExercises) * 100;
+
+  document.getElementById("sessionProgress").style.width =
+    Math.min(progress, 100) + "%";
+
+  const phase = document.getElementById("sessionPhase");
+  const timer = document.getElementById("sessionTimer");
+  const message = document.getElementById("sessionMessage");
+
+  if (session.phase === "countdown") {
+    phase.textContent = "PRÉPARE-TOI";
+    timer.textContent = session.remaining;
+    message.textContent = "Ta séance commence dans quelques secondes.";
+  } else if (session.phase === "rest") {
+    phase.textContent = "TEMPS DE REPOS";
+    timer.textContent = session.remaining;
+    message.textContent = "Récupère. La prochaine série arrive bientôt.";
+  } else if (session.phase === "paused") {
+    phase.textContent = "SÉANCE EN PAUSE";
+    timer.textContent = session.remaining === null
+      ? "Ⅱ"
+      : session.remaining;
+    message.textContent = "Appuie sur Reprendre quand tu es prêt.";
+  } else {
+    phase.textContent = "À TOI DE JOUER";
+    timer.textContent = "GO";
+    message.textContent = "Effectue ta série, puis valide-la.";
+  }
+
+  document.getElementById("pauseSession").textContent =
+    session.phase === "paused" ? "REPRENDRE" : "PAUSE";
+
+  document.getElementById("completeSet").disabled =
+    session.phase !== "exercise";
+
+  document.getElementById("skipExercise").disabled =
+    session.phase === "paused";
+}
+
+function startRest(seconds) {
+  const duration = Math.max(0, Number(seconds) || 0);
+
+  if (duration === 0) {
+    activeWorkout.phase = "exercise";
+    activeWorkout.remaining = null;
+    renderActiveSession();
+    return;
+  }
+
+  activeWorkout.phase = "rest";
+  activeWorkout.remaining = duration;
+  renderActiveSession();
+  startWorkoutInterval();
+}
+
+function completeWorkoutSet() {
+  const session = activeWorkout;
+
+  if (!session || session.phase !== "exercise") return;
+
+  const exercise = session.exercises[session.exerciseIndex];
+  const totalSets = Number(exercise.sets) || 1;
+
+  session.completedSets++;
+
+  if (session.setIndex < totalSets) {
+    session.setIndex++;
+    startRest(exercise.rest);
+    return;
+  }
+
+  if (session.exerciseIndex < session.exercises.length - 1) {
+    session.exerciseIndex++;
+    session.setIndex = 1;
+    startRest(exercise.rest);
+    return;
+  }
+
+  finishActiveWorkout();
+}
+
+function skipWorkoutExercise() {
+  const session = activeWorkout;
+
+  if (!session || session.phase === "paused") return;
+
+  if (session.exerciseIndex < session.exercises.length - 1) {
+    session.exerciseIndex++;
+    session.setIndex = 1;
+    session.phase = "exercise";
+    session.remaining = null;
+    clearInterval(workoutInterval);
+    renderActiveSession();
+  } else {
+    finishActiveWorkout();
+  }
+}
+
+function toggleWorkoutPause() {
+  const session = activeWorkout;
+
+  if (!session || session.finished) return;
+
+  if (session.phase === "paused") {
+    session.phase = session.pausedPhase;
+    session.pausedPhase = null;
+    renderActiveSession();
+
+    if (session.phase === "rest" || session.phase === "countdown") {
+      startWorkoutInterval();
+    }
+  } else {
+    session.pausedPhase = session.phase;
+    session.phase = "paused";
+    clearInterval(workoutInterval);
+    renderActiveSession();
+  }
+}
+
+function finishActiveWorkout() {
+  const session = activeWorkout;
+
+  if (!session || session.finished) return;
+
+  clearInterval(workoutInterval);
+  session.finished = true;
+  session.phase = "finished";
+
+  const duration = Math.max(
+    0,
+    Math.round((Date.now() - session.startedAt) / 60000)
+  );
+
+  data.completedSessions = data.completedSessions || [];
+
+  data.completedSessions.push({
+    date: session.date,
+    completedAt: new Date().toISOString(),
+    duration,
+    completedSets: session.completedSets,
+    exercises: session.exercises.map(ex => ({
+      name: ex.name,
+      sets: ex.sets,
+      reps: ex.reps,
+      weight: ex.weight
+    }))
+  });
+
+  save();
+
+  document.getElementById("sessionPhase").textContent = "SÉANCE TERMINÉE";
+  document.getElementById("sessionTimer").textContent = "✓";
+  document.getElementById("sessionExercise").textContent = "BRAVO.";
+  document.getElementById("sessionPosition").textContent =
+    "Tu as terminé ton entraînement.";
+  document.getElementById("sessionWeight").textContent =
+    session.completedSets;
+  document.getElementById("sessionReps").textContent = duration + " min";
+  document.getElementById("sessionSets").textContent =
+    session.exercises.length;
+
+  document.getElementById("sessionProgress").style.width = "100%";
+  document.getElementById("sessionMessage").textContent =
+    "Chaque séance compte. Continue ton Years Arc.";
+
+  document.getElementById("sessionActions").innerHTML = `
+    <button class="primary" id="closeFinishedSession">
+      FERMER LE RÉCAPITULATIF
+    </button>
+  `;
+
+  document.getElementById("closeFinishedSession").addEventListener("click", () => {
+    document.getElementById("activeSession").style.display = "none";
+    activeWorkout = null;
+  });
+
+  renderWorkoutHistory();
+}
+
+document.getElementById("startWorkout").addEventListener("click", startWorkout);
+
+document.getElementById("completeSet").addEventListener("click", completeWorkoutSet);
+
+document.getElementById("pauseSession").addEventListener("click", toggleWorkoutPause);
+
+document.getElementById("skipExercise").addEventListener("click", skipWorkoutExercise);
+
+document.getElementById("stopSession").addEventListener("click", () => {
+  if (confirm("Tu veux vraiment terminer cette séance maintenant ?")) {
+    finishActiveWorkout();
+  }
+});
 /* GLOW UP : objectifs et gratitude */
 function renderGoals() {
   const el=document.getElementById("goalsList");
