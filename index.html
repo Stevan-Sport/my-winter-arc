@@ -677,7 +677,43 @@ hr {
 .session-actions .primary {
   width: 100%;
 }
-  
+
+/* CORRECTION CALENDRIER ET LÉGENDE */
+.calendar-grid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+}
+
+#calendarGrid > .calendar-day {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  aspect-ratio: 1;
+}
+
+#calendarWeekdays > div {
+  min-width: 0;
+}
+
+.calendar-day.empty {
+  padding: 0;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dot {
+  display: inline-block;
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
 </style>
 </head>
 
