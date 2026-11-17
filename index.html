@@ -714,6 +714,139 @@ hr {
   vertical-align: middle;
 }
 
+/* YEARS ARC — ACHIEVEMENTS */
+.achievement-section {
+  margin-top: 24px;
+}
+
+.achievement-item {
+  background: linear-gradient(145deg, #202020, #141414);
+  border: 1px solid #383838;
+  border-radius: 13px;
+  padding: 14px;
+  margin: 11px 0;
+}
+
+.achievement-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.achievement-icon {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #29251d;
+  border: 1px solid #716044;
+  color: #d4bd8c;
+  font-size: 22px;
+}
+
+.achievement-item.locked .achievement-icon {
+  filter: grayscale(1);
+  opacity: .45;
+  border-color: #444;
+}
+
+.achievement-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-name {
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.achievement-description {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.achievement-percent {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.achievement-track {
+  height: 5px;
+  background: #383838;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 13px;
+}
+
+.achievement-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8d8066, #d4c19a);
+  border-radius: 10px;
+  transition: width .4s ease;
+}
+
+.achievement-status {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin-top: 9px;
+}
+
+.achievement-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0,0,0,.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.achievement-overlay.show {
+  display: flex;
+  animation: achievementFade .35s ease;
+}
+
+.achievement-popup {
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+  padding: 30px 22px;
+  background: linear-gradient(145deg, #26231d, #111);
+  border: 1px solid #8c754a;
+  border-radius: 20px;
+  box-shadow: 0 0 50px rgba(185,164,122,.15);
+}
+
+.achievement-popup-icon {
+  font-size: 65px;
+  margin: 15px 0;
+  animation: achievementPop .6s ease;
+}
+
+.achievement-popup h2 {
+  color: #d4bd8c;
+  font-size: 25px;
+}
+
+@keyframes achievementFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes achievementPop {
+  0% { transform: scale(.3); }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+  
 </style>
 </head>
 
