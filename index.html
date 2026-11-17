@@ -574,6 +574,99 @@ hr {
   }
 }
 
+/* MODE SÉANCE — YEARS ARC */
+.session-card {
+  background: linear-gradient(150deg, #202020, #101010);
+  border: 1px solid #514a3c;
+  border-radius: 18px;
+  padding: 22px 18px;
+  margin: 15px 0;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(0,0,0,.25);
+}
+
+.session-kicker {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+}
+
+.session-timer {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 64px;
+  line-height: 1.2;
+  margin: 18px 0;
+  color: #eee;
+  font-variant-numeric: tabular-nums;
+}
+
+.session-exercise {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  margin: 15px 0 8px;
+}
+
+.session-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.session-stat {
+  background: #252525;
+  border: 1px solid #393939;
+  border-radius: 11px;
+  padding: 12px 5px;
+}
+
+.session-stat strong {
+  display: block;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px;
+  color: var(--gold);
+}
+
+.session-stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+.session-progress {
+  height: 3px;
+  background: #383838;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 18px 0;
+}
+
+.session-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8d8066, #d4c19a);
+  transition: width .3s;
+}
+
+.session-message {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  min-height: 18px;
+  margin: 10px 0 18px;
+}
+
+.session-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.session-actions .secondary,
+.session-actions .primary {
+  width: 100%;
+}
+  
 </style>
 </head>
 
