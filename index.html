@@ -762,6 +762,42 @@ hr {
   ▶ LANCER LA SÉANCE
 </button>
   </div>
+  <div class="session-card" id="activeSession" style="display:none">
+  <div class="session-kicker" id="sessionPhase">YEARS ARC · TRAINING MODE</div>
+  <div class="session-timer" id="sessionTimer">03</div>
+  <div class="session-exercise" id="sessionExercise"></div>
+  <div class="muted small" id="sessionPosition"></div>
+
+  <div class="session-stats">
+    <div class="session-stat">
+      <strong id="sessionWeight">—</strong>
+      <span>CHARGE KG</span>
+    </div>
+    <div class="session-stat">
+      <strong id="sessionReps">—</strong>
+      <span>RÉPÉTITIONS</span>
+    </div>
+    <div class="session-stat">
+      <strong id="sessionSets">—</strong>
+      <span>SÉRIE</span>
+    </div>
+  </div>
+
+  <div class="session-progress">
+    <div class="session-progress-fill" id="sessionProgress"></div>
+  </div>
+
+  <div class="session-message" id="sessionMessage">
+    Prépare-toi, ta séance va commencer.
+  </div>
+
+  <div class="session-actions" id="sessionActions">
+    <button class="primary" id="completeSet">SÉRIE TERMINÉE</button>
+    <button class="secondary" id="pauseSession">PAUSE</button>
+    <button class="secondary" id="skipExercise">PASSER L'EXERCICE</button>
+    <button class="danger" id="stopSession">TERMINER LA SÉANCE</button>
+  </div>
+</div>
   <div class="card" id="exerciseForm" style="display:none">
     <h3 id="exerciseFormTitle">AJOUTER UN EXERCICE</h3>
     <label>Nom de l'exercice ou machine</label>
