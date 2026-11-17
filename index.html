@@ -1036,6 +1036,24 @@ function showPage(page) {
 }
 document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
 
+/* MASQUER LA NAVIGATION AU DÉFILEMENT */
+const bottomNav = document.querySelector(".nav");
+let lastScrollY = window.scrollY;
+
+window.addEventListener("scroll", () => {
+  const currentScrollY = window.scrollY;
+
+  if (currentScrollY < 40) {
+    bottomNav.classList.remove("nav-hidden");
+  } else if (currentScrollY > lastScrollY + 8) {
+    bottomNav.classList.add("nav-hidden");
+  } else if (currentScrollY < lastScrollY - 8) {
+    bottomNav.classList.remove("nav-hidden");
+  }
+
+  lastScrollY = Math.max(0, currentScrollY);
+}, { passive: true });
+
 /* Accueil et habitudes */
 function renderHabitGroup(containerId,group) {
   const el=document.getElementById(containerId);
