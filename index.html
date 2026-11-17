@@ -1261,17 +1261,57 @@ document.getElementById("saveWorkout").addEventListener("click",()=>{
   alert("Séance enregistrée.");
 });
 function renderWorkoutHistory() {
-  const el=document.getElementById("workoutHistory");
-  const history=data.history||{};
-  const dates=Object.keys(history).sort().reverse();
-  if(!dates.length) { el.innerHTML='<div class="empty">Tes séances enregistrées apparaîtront ici.</div>';return; }
-  el.innerHTML=dates.slice(0,20).map(date=>`
-    <div class="history-item">
-      <strong style="font-size:12px">${parseDate(date).toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long"})}</strong>
-      <div class="muted small" style="margin-top:5px">${history[date].map(x=>escapeHTML(x.name)).join(" · ")}</div>
-    </div>`).join("");
-}
+  const el = document.getElementById("workoutHistory");
+  const history = data.history || {};
+  const dates = Object.keys(history).sort().reverse();
+  const completed = [...(data.completedSessions || [])].reverse();
 
+  let html = "";
+
+  if (!dates.length && !completed.length) {
+    el.innerHTML = '<div class="empty">Tes séances enregistrées apparaîtront ici.</div>';
+    return;
+  }
+
+  dates.slice(0, 20).forEach(date => {
+    html += `
+      <div class="history-item">
+        <strong style="font-size:12px">
+          ${parseDate(date).toLocaleDateString("fr-FR", {
+            weekday:"long", day:"numeric", month:"long"
+          })}
+        </strong>
+        <div class="muted small" style="margin-top:5px">
+          Programme : ${history[date].map(x => escapeHTML(x.name)).join(" · ")}
+        </div>
+      </div>`;
+  });
+
+  if (completed.length) {
+    html += `
+      <hr>
+      <div class="group-label">SÉANCES TERMINÉES</div>`;
+
+    completed.slice(0, 20).forEach(session => {
+      html += `
+        <div class="history-item">
+          <strong style="font-size:12px">
+            ${parseDate(session.date).toLocaleDateString("fr-FR", {
+              weekday:"long", day:"numeric", month:"long"
+            })}
+          </strong>
+          <div class="muted small" style="margin-top:5px">
+            ✓ ${session.completedSets} séries · ${session.duration} min
+          </div>
+          <div class="muted small">
+            ${session.exercises.map(x => escapeHTML(x.name)).join(" · ")}
+          </div>
+        </div>`;
+    });
+  }
+
+  el.innerHTML = html;
+}
 /* MODE SÉANCE — MINUTEUR ET ENCHAÎNEMENT */
 
 let activeWorkout = null;
