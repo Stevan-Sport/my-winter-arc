@@ -1479,6 +1479,7 @@ function renderSport() {
     list.appendChild(el);
   });
   renderWorkoutHistory();
+  renderPerformanceTracker();
 }
 document.getElementById("fixedMode").addEventListener("click",()=>{
   data.sportMode="fixed";save();renderSport();
