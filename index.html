@@ -846,6 +846,305 @@ hr {
   100% { transform: scale(1); }
 }
 
+
+/* =================================
+   YEARS ARC — DARK DISCIPLINE
+================================= */
+
+:root {
+  --bg: #050505;
+  --panel: #0d0d0d;
+  --panel2: #151515;
+  --line: #292929;
+  --text: #f2f2f2;
+  --muted: #777777;
+  --gold: #e02b2b;
+  --green: #8c9690;
+  --red: #e02b2b;
+  --radius: 10px;
+}
+
+/* TYPOGRAPHIE */
+h1, h2, .brand,
+.year-number, .total-number,
+.session-timer, .session-exercise {
+  font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
+  font-weight: 850;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 34px;
+  letter-spacing: -1.5px;
+}
+
+h2 {
+  font-size: 23px;
+  letter-spacing: -0.7px;
+}
+
+h3 {
+  color: #e02b2b;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+}
+
+.brand {
+  font-size: 27px;
+  letter-spacing: 3px;
+}
+
+.tagline {
+  color: #e02b2b;
+  font-weight: 800;
+}
+
+/* CARTES */
+.card {
+  background: #0d0d0d;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.hero {
+  background: linear-gradient(135deg, #171717, #080808 75%);
+  border: 1px solid #383838;
+}
+
+.hero:after {
+  border-color: rgba(224,43,43,.12);
+}
+
+.eyebrow,
+.group-label,
+.section-title span {
+  color: #e02b2b;
+  font-weight: 800;
+}
+
+/* PROGRESSION */
+.progress-track {
+  background: #292929;
+  border-radius: 0;
+}
+
+.progress-fill {
+  background: #e02b2b;
+  border-radius: 0;
+}
+
+/* BOUTONS */
+.primary {
+  background: #e02b2b;
+  color: #fff;
+  border: 1px solid #e02b2b;
+  border-radius: 5px;
+  font-weight: 850;
+}
+
+.secondary {
+  background: #171717;
+  color: #eee;
+  border: 1px solid #393939;
+  border-radius: 5px;
+}
+
+.danger {
+  background: #260d0d;
+  color: #ff7777;
+  border: 1px solid #652020;
+  border-radius: 5px;
+}
+
+/* CHAMPS */
+input,
+select,
+textarea {
+  background: #090909;
+  border: 1px solid #303030;
+  border-radius: 5px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #e02b2b;
+}
+
+/* HABITUDES */
+.check {
+  border-radius: 4px;
+  border-color: #555;
+}
+
+.check:checked {
+  background: #e02b2b;
+  border-color: #e02b2b;
+}
+
+.weekly-count {
+  color: #e02b2b;
+}
+
+/* ONGLETS */
+.tabs {
+  border-bottom: 1px solid #292929;
+}
+
+.tab {
+  border-radius: 5px;
+  border-color: #292929;
+  font-weight: 750;
+}
+
+.tab.active {
+  background: #e02b2b;
+  color: #fff;
+  border-color: #e02b2b;
+}
+
+/* NAVIGATION */
+.nav {
+  background: rgba(5,5,5,.97);
+  border-top: 1px solid #292929;
+}
+
+.nav button {
+  font-weight: 750;
+}
+
+.nav button.active {
+  background: #1a1a1a;
+  color: #e02b2b;
+}
+
+/* ENTRAÎNEMENTS */
+.exercise {
+  background: #0c0c0c;
+  border: 1px solid #292929;
+  border-radius: 7px;
+}
+
+.mini-btn {
+  background: #171717;
+  border-color: #353535;
+  border-radius: 4px;
+  color: #eee;
+}
+
+/* MODE SÉANCE */
+.session-card {
+  background: linear-gradient(145deg, #151515, #080808);
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.session-kicker {
+  color: #e02b2b;
+  font-weight: 850;
+}
+
+.session-timer {
+  color: #fff;
+  font-size: 68px;
+}
+
+.session-stat {
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 5px;
+}
+
+.session-stat strong {
+  color: #e02b2b;
+  font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
+  font-weight: 850;
+}
+
+.session-progress {
+  border-radius: 0;
+}
+
+.session-progress-fill {
+  background: #e02b2b;
+}
+
+/* CALENDRIER */
+.calendar-day {
+  background: #171717;
+  border-radius: 4px;
+}
+
+.calendar-day.done {
+  background: #28372e;
+  color: #b9d7c1;
+}
+
+.calendar-day.missed {
+  background: #481919;
+  color: #ffb4b4;
+}
+
+.calendar-day.today {
+  outline: 2px solid #e02b2b;
+}
+
+/* NOTIFICATIONS */
+.notice {
+  background: #151010;
+  border-left: 3px solid #e02b2b;
+  border-radius: 3px;
+}
+
+/* BADGES */
+.pill {
+  border: 1px solid #702323;
+  color: #ff5555;
+  border-radius: 4px;
+}
+
+.achievement-item {
+  background: #0d0d0d;
+  border: 1px solid #292929;
+  border-radius: 7px;
+}
+
+.achievement-icon {
+  background: #171010;
+  border: 1px solid #632020;
+  border-radius: 7px;
+  color: #ef4444;
+}
+
+.achievement-percent,
+.achievement-status {
+  color: #e02b2b;
+}
+
+.achievement-track {
+  background: #292929;
+  border-radius: 0;
+}
+
+.achievement-fill {
+  background: #e02b2b;
+  border-radius: 0;
+}
+
+.achievement-popup {
+  background: #101010;
+  border: 1px solid #8a2525;
+  border-radius: 9px;
+  box-shadow: 0 0 35px rgba(224,43,43,.10);
+}
+
+.achievement-popup h2 {
+  color: #e02b2b;
+}
+
   
 </style>
 </head>
