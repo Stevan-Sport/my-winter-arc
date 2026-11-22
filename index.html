@@ -1589,6 +1589,138 @@ function renderWorkoutHistory() {
 
   el.innerHTML = html;
 }
+
+
+function renderPerformanceTracker() {
+  const select = document.getElementById("performanceExercise");
+  const sessions = data.completedSessions || [];
+
+  const records = {};
+
+  sessions.forEach(session => {
+    (session.exercises || []).forEach(ex => {
+      const name = (ex.name || "").trim();
+      const weight = Number(ex.weight);
+
+      if (!name || !Number.isFinite(weight) || weight < 0) return;
+
+      const key = name.toLowerCase();
+
+      if (!records[key]) {
+        records[key] = { name, entries: [] };
+      }
+
+      records[key].entries.push({
+        date: session.date,
+        weight
+      });
+    });
+  });
+
+  const exercises = Object.values(records);
+  const previousSelection = select.value;
+
+  select.innerHTML = "";
+
+  if (!exercises.length) {
+    select.innerHTML = '<option value="">Aucun exercice enregistré</option>';
+    document.getElementById("performanceBest").textContent = "—";
+    document.getElementById("performancePrevious").textContent = "—";
+    document.getElementById("performanceProgress").textContent = "—";
+    document.getElementById("performanceChart").innerHTML =
+      '<p class="muted small">Termine une séance pour commencer ton suivi.</p>';
+    document.getElementById("performanceHistory").innerHTML = "";
+    return;
+  }
+
+  exercises.sort((a, b) => a.name.localeCompare(b.name, "fr"));
+
+  exercises.forEach(ex => {
+    const option = document.createElement("option");
+    option.value = ex.name.toLowerCase();
+    option.textContent = ex.name;
+    select.appendChild(option);
+  });
+
+  select.value = records[previousSelection]
+    ? previousSelection
+    : exercises[0].name.toLowerCase();
+
+  const selected = records[select.value];
+  if (!selected) return;
+
+  const entries = selected.entries.sort((a, b) =>
+    a.date.localeCompare(b.date)
+  );
+
+  const best = Math.max(...entries.map(e => e.weight));
+  const latest = entries[entries.length - 1];
+  const previous = entries.length > 1
+    ? entries[entries.length - 2]
+    : null;
+
+  document.getElementById("performanceBest").textContent = best + " kg";
+  document.getElementById("performancePrevious").textContent =
+    latest.weight + " kg";
+
+  let progress = "Nouveau suivi";
+
+  if (previous) {
+    const difference = latest.weight - previous.weight;
+    progress = (difference > 0 ? "+" : "") + difference + " kg";
+  }
+
+  document.getElementById("performanceProgress").textContent = progress;
+
+  const chart = document.getElementById("performanceChart");
+
+  if (entries.length < 2) {
+    chart.innerHTML =
+      '<p class="muted small">Ajoute une autre séance pour voir ton évolution.</p>';
+  } else {
+    const values = entries.map(e => e.weight);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const range = Math.max(max - min, 1);
+
+    const points = values.map((value, i) => {
+      const x = 20 + i * (260 / (values.length - 1));
+      const y = 115 - ((value - min) / range) * 85;
+      return `${x},${y}`;
+    }).join(" ");
+
+    chart.innerHTML = `
+      <svg viewBox="0 0 300 145" width="100%" role="img"
+           aria-label="Évolution de la charge">
+        <polyline points="${points}" fill="none"
+          stroke="#b9a47a" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+        ${points.split(" ").map(point => {
+          const [x, y] = point.split(",");
+          return `<circle cx="${x}" cy="${y}" r="4" fill="#d4c19a"/>`;
+        }).join("")}
+        <text x="20" y="138" fill="#92918d" font-size="9">Début</text>
+        <text x="280" y="138" fill="#92918d" font-size="9" text-anchor="end">Aujourd'hui</text>
+      </svg>
+    `;
+  }
+
+  document.getElementById("performanceHistory").innerHTML =
+    [...entries].reverse().map(entry => `
+      <div class="history-item">
+        <strong>${entry.weight} kg</strong>
+        <span class="muted small">
+          — ${parseDate(entry.date).toLocaleDateString("fr-FR")}
+        </span>
+      </div>
+    `).join("");
+}
+
+document.getElementById("performanceExercise").addEventListener("change", () => {
+  renderPerformanceTracker();
+});
+
+
 /* MODE SÉANCE — MINUTEUR ET ENCHAÎNEMENT */
 
 let activeWorkout = null;
