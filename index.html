@@ -10,19 +10,24 @@
 <meta name="apple-mobile-web-app-title" content="YEARS ARC">
   <title>YEARS ARC</title>
 
+
 <style>
+/* ==========================================
+   YEARS ARC — BLACKOUT / DARK RED
+   UNIFIED DESIGN SYSTEM
+========================================== */
 
 :root {
-  --bg: #090909;
-  --panel: #151515;
-  --panel2: #202020;
-  --line: #343434;
-  --text: #eeeeec;
-  --muted: #92918d;
-  --gold: #b9a47a;
-  --green: #78977f;
-  --red: #a66e6e;
-  --radius: 17px;
+  --bg: #050505;
+  --panel: #0c0c0c;
+  --panel2: #151515;
+  --line: #292929;
+  --text: #f1f1f1;
+  --muted: #858585;
+  --gold: #8b0000;
+  --green: #858585;
+  --red: #8b0000;
+  --radius: 8px;
 }
 
 * {
@@ -49,24 +54,34 @@ button {
   cursor: pointer;
 }
 
-h1, h2 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  letter-spacing: -0.5px;
+button:disabled {
+  opacity: .4;
+}
+
+h1, h2, .brand,
+.year-number, .total-number,
+.session-timer, .session-exercise {
+  font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
+  font-weight: 850;
+  letter-spacing: -1px;
+  text-transform: uppercase;
 }
 
 h1 {
   font-size: 34px;
+  letter-spacing: -1.5px;
 }
 
 h2 {
   font-size: 23px;
+  letter-spacing: -.7px;
 }
 
 h3 {
   font-size: 10px;
-  letter-spacing: 2px;
-  color: #d4d0c7;
+  letter-spacing: 2.5px;
+  color: #f1f1f1;
+  font-weight: 800;
 }
 
 p {
@@ -79,25 +94,101 @@ p {
   padding: 22px 18px;
 }
 
-header {
+/* HEADER */
+
+.command-header {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding: 17px 0 20px;
+  margin: 9px 0 25px;
+  border-bottom: 2px solid #8b0000;
+  position: relative;
+}
+
+.command-header::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 55px;
+  height: 3px;
+  background: #8b0000;
+}
+
+.command-topline {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 9px 0 30px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
-.brand {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 25px;
-  font-weight: 400;
-  letter-spacing: 3.5px;
-}
-
-.tagline {
-  color: var(--gold);
+.command-system,
+.command-status,
+.command-date-label,
+.command-subtitle {
   font-size: 8px;
-  letter-spacing: 2.5px;
-  margin-top: 7px;
+  font-weight: 850;
+  letter-spacing: 2px;
+}
+
+.command-system,
+.command-subtitle,
+.command-date-label {
+  color: #777;
+}
+
+.command-status {
+  color: #a00000;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.status-light {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8b0000;
+  box-shadow: 0 0 8px rgba(139,0,0,.55);
+}
+
+.command-header .brand {
+  font-size: 37px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.brand-red {
+  color: #8b0000;
+}
+
+.command-header .tagline {
+  font-size: 8px;
+  margin-top: 9px;
+  letter-spacing: 2px;
+  color: #8b0000;
+  font-weight: 800;
+}
+
+.command-subtitle {
+  margin-top: 15px;
+}
+
+.command-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #242424;
+  padding-top: 12px;
+}
+
+.command-date .header-date {
+  color: #eee;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1px;
 }
 
 .header-date,
@@ -105,18 +196,20 @@ header {
   color: var(--muted);
 }
 
+/* CARDS */
+
 .card {
-  background: linear-gradient(145deg, #1b1b1b, #121212);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  background: #0c0c0c;
+  border: 1px solid #292929;
+  border-radius: 8px;
   padding: 19px;
   margin: 14px 0;
-  box-shadow: 0 8px 25px rgba(0,0,0,.16);
+  box-shadow: none;
 }
 
 .hero {
-  background: linear-gradient(135deg, #24221e, #171717 60%, #101010);
-  border-color: #514a3c;
+  background: linear-gradient(145deg, #151515, #080808);
+  border-color: #383838;
   position: relative;
   overflow: hidden;
 }
@@ -126,25 +219,27 @@ header {
   position: absolute;
   width: 150px;
   height: 150px;
-  border: 1px solid rgba(185,164,122,.16);
+  border: 1px solid rgba(139,0,0,.16);
   border-radius: 50%;
   right: -75px;
   top: -75px;
   pointer-events: none;
 }
 
+/* TITLES AND PROGRESS */
+
 .eyebrow,
 .group-label,
 .section-title span {
-  color: var(--gold);
+  color: #a00000;
   font-size: 9px;
   letter-spacing: 2px;
+  font-weight: 800;
 }
 
 .year-number,
 .total-number {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
+  font-weight: 850;
 }
 
 .year-number {
@@ -157,16 +252,16 @@ header {
 
 .progress-track {
   height: 4px;
-  background: #393832;
-  border-radius: 20px;
+  background: #292929;
+  border-radius: 2px;
   overflow: hidden;
   margin: 21px 0 10px;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8d8066, #d4c19a);
-  border-radius: 20px;
+  background: #8b0000;
+  border-radius: 2px;
 }
 
 .progress-meta {
@@ -183,6 +278,8 @@ header {
   margin: 30px 2px 10px;
 }
 
+/* HABITS AND GOALS */
+
 .habit-row,
 .weekly-row,
 .goal-row {
@@ -190,7 +287,7 @@ header {
   align-items: center;
   gap: 12px;
   padding: 14px 0;
-  border-bottom: 1px solid #292929;
+  border-bottom: 1px solid #242424;
 }
 
 .habit-row:last-child,
@@ -222,8 +319,8 @@ header {
   width: 23px;
   height: 23px;
   flex: none;
-  border: 1px solid #77736a;
-  border-radius: 50%;
+  border: 1px solid #555;
+  border-radius: 3px;
   background: transparent;
   display: grid;
   place-items: center;
@@ -231,66 +328,70 @@ header {
 }
 
 .check:checked {
-  background: var(--gold);
-  border-color: var(--gold);
+  background: #8b0000;
+  border-color: #8b0000;
 }
 
 .check:checked:after {
   content: "✓";
-  color: #111;
+  color: #fff;
   font-size: 13px;
   font-weight: 900;
 }
 
 .weekly-count {
-  color: var(--gold);
+  color: #a00000;
   font-size: 11px;
 }
+
+/* BUTTONS */
 
 .primary,
 .secondary,
 .danger {
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 13px 15px;
   font-size: 10px;
   letter-spacing: 1.3px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .primary {
-  background: var(--gold);
-  color: #111;
-  border: 1px solid var(--gold);
+  background: #8b0000;
+  color: #fff;
+  border: 1px solid #8b0000;
+}
+
+.primary:active {
+  background: #650000;
 }
 
 .secondary {
-  background: #202020;
+  background: #151515;
   color: var(--text);
-  border: 1px solid #44413a;
+  border: 1px solid #333;
 }
 
 .danger {
-  background: #382323;
-  color: #e8b4b4;
-  border: 1px solid #593535;
+  background: #1d0808;
+  color: #c98c8c;
+  border: 1px solid #4a1919;
 }
 
 .full {
   width: 100%;
 }
 
-button:disabled {
-  opacity: .4;
-}
+/* FORMS */
 
 input,
 select,
 textarea {
   width: 100%;
-  background: #101010;
+  background: #090909;
   color: var(--text);
-  border: 1px solid #393939;
-  border-radius: 9px;
+  border: 1px solid #303030;
+  border-radius: 5px;
   padding: 13px;
   outline: none;
   margin: 7px 0 13px;
@@ -300,7 +401,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--gold);
+  border-color: #8b0000;
 }
 
 textarea {
@@ -319,30 +420,33 @@ label {
   gap: 8px;
 }
 
+/* TABS */
+
 .tabs {
   display: flex;
   gap: 7px;
   overflow-x: auto;
   padding: 3px 0 13px;
   scrollbar-width: none;
+  border-bottom: 1px solid #292929;
 }
 
 .tab {
-  background: transparent;
+  background: #090909;
   color: var(--muted);
-  border: 1px solid #333;
-  border-radius: 30px;
+  border: 1px solid #292929;
+  border-radius: 4px;
   padding: 10px 15px;
   font-size: 10px;
   letter-spacing: 1px;
   white-space: nowrap;
+  font-weight: 750;
 }
 
 .tab.active {
-  background: #dedbd3;
-  color: #111;
-  border-color: #dedbd3;
-  font-weight: 750;
+  background: #8b0000;
+  color: #fff;
+  border-color: #8b0000;
 }
 
 .page {
@@ -353,6 +457,8 @@ label {
   display: block;
 }
 
+/* WEEKLY DAY SELECTOR */
+
 .day-selector {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -361,26 +467,28 @@ label {
 }
 
 .day-btn {
-  background: #1b1b1b;
+  background: #151515;
   color: var(--muted);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 11px 2px;
   font-size: 9px;
 }
 
 .day-btn.active {
-  background: var(--gold);
-  color: #111;
-  border-color: var(--gold);
+  background: #8b0000;
+  color: #fff;
+  border-color: #8b0000;
 }
 
+/* EXERCISES */
+
 .exercise {
-  border: 1px solid var(--line);
-  border-radius: 11px;
+  border: 1px solid #292929;
+  border-radius: 6px;
   padding: 14px;
   margin: 9px 0;
-  background: #171717;
+  background: #0c0c0c;
 }
 
 .exercise-top {
@@ -390,7 +498,7 @@ label {
 }
 
 .exercise-name {
-  font-weight: 650;
+  font-weight: 750;
   font-size: 13px;
 }
 
@@ -407,212 +515,49 @@ label {
 }
 
 .mini-btn {
-  border: 1px solid #3c3a34;
-  color: #c4c0b7;
-  background: #202020;
-  border-radius: 7px;
+  border: 1px solid #353535;
+  color: #eee;
+  background: #151515;
+  border-radius: 4px;
   padding: 7px 9px;
   font-size: 9px;
 }
+
+/* WORKOUT HISTORY */
 
 .history-item {
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
 }
 
-.calendar-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
+/* SESSION TIMER */
 
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-}
-
-.calendar-day {
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
-  font-size: 11px;
-  color: var(--muted);
-  background: #202020;
-}
-
-.calendar-day.empty {
-  background: transparent;
-}
-
-.calendar-day.done {
-  background: #34463a;
-  color: #d3e5d7;
-}
-
-.calendar-day.missed {
-  background: #503333;
-  color: #f0caca;
-}
-
-.calendar-day.today {
-  outline: 1px solid var(--gold);
-  outline-offset: 1px;
-  color: white;
-}
-
-.legend {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  font-size: 10px;
-  color: var(--muted);
-  margin-top: 15px;
-}
-
-.notice {
-  border-left: 2px solid var(--gold);
-  padding: 13px;
-  background: #201e19;
-  border-radius: 5px;
-  margin: 12px 0;
-}
-
-.notice strong {
-  font-size: 11px;
-}
-
-.notice p {
-  color: #c5c0b5;
-  font-size: 11px;
-}
-
-.duo-status {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 11px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 11px;
-}
-
-.status-wait {
-  color: var(--muted);
-}
-
-.status-done {
-  color: #b9d3be;
-}
-
-.empty {
-  color: var(--muted);
-  font-size: 11px;
-  text-align: center;
-  padding: 24px 8px;
-}
-
-.pill {
-  display: inline-block;
-  border: 1px solid #62583f;
-  color: var(--gold);
-  border-radius: 30px;
-  padding: 6px 10px;
-  font-size: 9px;
-}
-
-.nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-  background: rgba(10,10,10,.96);
-  border-top: 1px solid #303030;
-  padding: 10px 7px;
-  padding-bottom: calc(10px + env(safe-area-inset-bottom));
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.nav button {
-  flex: 1;
-  max-width: 130px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-size: 9px;
-  letter-spacing: .7px;
-  padding: 8px 2px;
-  border-radius: 9px;
-}
-
-.nav button.active {
-  background: #24231f;
-  color: var(--gold);
-}
-
-/* NAVIGATION QUI SE MASQUE AU SCROLL */
-.nav {
-  transition: transform 0.25s ease;
-  will-change: transform;
-}
-
-.nav.nav-hidden {
-  transform: translateY(110%);
-  pointer-events: none;
-}
-
-.nav-icon {
-  display: block;
-  font-size: 17px;
-  margin-bottom: 4px;
-}
-
-hr {
-  border: 0;
-  border-top: 1px solid var(--line);
-  margin: 19px 0;
-}
-
-@media (min-width: 600px) {
-  .app {
-    padding: 28px;
-  }
-}
-
-/* MODE SÉANCE — YEARS ARC */
 .session-card {
-  background: linear-gradient(150deg, #202020, #101010);
-  border: 1px solid #514a3c;
-  border-radius: 18px;
+  background: linear-gradient(145deg, #121212, #070707);
+  border: 1px solid #333;
+  border-radius: 8px;
   padding: 22px 18px;
   margin: 15px 0;
   text-align: center;
-  box-shadow: 0 12px 35px rgba(0,0,0,.25);
+  box-shadow: none;
 }
 
 .session-kicker {
-  color: var(--gold);
+  color: #a00000;
   font-size: 9px;
   letter-spacing: 2.5px;
+  font-weight: 850;
 }
 
 .session-timer {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 64px;
+  font-size: 68px;
   line-height: 1.2;
   margin: 18px 0;
-  color: #eee;
+  color: #fff;
   font-variant-numeric: tabular-nums;
 }
 
 .session-exercise {
-  font-family: Georgia, "Times New Roman", serif;
   font-size: 27px;
   margin: 15px 0 8px;
 }
@@ -625,17 +570,17 @@ hr {
 }
 
 .session-stat {
-  background: #252525;
-  border: 1px solid #393939;
-  border-radius: 11px;
+  background: #101010;
+  border: 1px solid #292929;
+  border-radius: 5px;
   padding: 12px 5px;
 }
 
 .session-stat strong {
   display: block;
-  font-family: Georgia, "Times New Roman", serif;
   font-size: 21px;
-  color: var(--gold);
+  color: #a00000;
+  font-weight: 850;
 }
 
 .session-stat span {
@@ -648,15 +593,15 @@ hr {
 
 .session-progress {
   height: 3px;
-  background: #383838;
-  border-radius: 10px;
+  background: #292929;
+  border-radius: 2px;
   overflow: hidden;
   margin: 18px 0;
 }
 
 .session-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8d8066, #d4c19a);
+  background: #8b0000;
   transition: width .3s;
 }
 
@@ -678,9 +623,19 @@ hr {
   width: 100%;
 }
 
-/* CORRECTION CALENDRIER ET LÉGENDE */
+/* CALENDAR */
+
+.calendar-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
 .calendar-grid {
+  display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 5px;
   width: 100%;
 }
 
@@ -695,8 +650,44 @@ hr {
   min-width: 0;
 }
 
+.calendar-day {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--muted);
+  background: #151515;
+}
+
 .calendar-day.empty {
+  background: transparent;
   padding: 0;
+}
+
+.calendar-day.done {
+  background: #292929;
+  color: #eee;
+}
+
+.calendar-day.missed {
+  background: #310909;
+  color: #d49b9b;
+}
+
+.calendar-day.today {
+  outline: 2px solid #8b0000;
+  outline-offset: 1px;
+  color: white;
+}
+
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 15px;
 }
 
 .legend span {
@@ -714,15 +705,119 @@ hr {
   vertical-align: middle;
 }
 
-/* YEARS ARC — ACHIEVEMENTS */
+/* NOTICES AND STATUS */
+
+.notice {
+  border-left: 3px solid #8b0000;
+  padding: 13px;
+  background: #110909;
+  border-radius: 3px;
+  margin: 12px 0;
+}
+
+.notice strong {
+  font-size: 11px;
+}
+
+.notice p {
+  color: #aaa;
+  font-size: 11px;
+}
+
+.duo-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+}
+
+.status-wait {
+  color: var(--muted);
+}
+
+.status-done {
+  color: #ccc;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  padding: 24px 8px;
+}
+
+.pill {
+  display: inline-block;
+  border: 1px solid #541414;
+  color: #b35c5c;
+  background: #110808;
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-size: 9px;
+}
+
+/* BOTTOM NAVIGATION */
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(5,5,5,.97);
+  border-top: 1px solid #292929;
+  padding: 10px 7px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: transform .25s ease;
+  will-change: transform;
+}
+
+.nav.nav-hidden {
+  transform: translateY(110%);
+  pointer-events: none;
+}
+
+.nav button {
+  flex: 1;
+  max-width: 130px;
+  border: 0;
+  background: transparent;
+  color: #777;
+  font-size: 9px;
+  letter-spacing: .7px;
+  font-weight: 750;
+  padding: 8px 2px;
+  border-radius: 5px;
+}
+
+.nav button.active {
+  background: #190909;
+  color: #a00000;
+}
+
+.nav-icon {
+  display: block;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+/* ACHIEVEMENTS */
+
 .achievement-section {
   margin-top: 24px;
 }
 
 .achievement-item {
-  background: linear-gradient(145deg, #202020, #141414);
-  border: 1px solid #383838;
-  border-radius: 13px;
+  background: #0c0c0c;
+  border: 1px solid #292929;
+  border-radius: 7px;
   padding: 14px;
   margin: 11px 0;
 }
@@ -739,10 +834,10 @@ hr {
   flex: none;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: #29251d;
-  border: 1px solid #716044;
-  color: #d4bd8c;
+  border-radius: 5px;
+  background: #151515;
+  border: 1px solid #383838;
+  color: #aaa;
   font-size: 22px;
 }
 
@@ -770,38 +865,40 @@ hr {
 }
 
 .achievement-percent {
-  color: var(--gold);
+  color: #a00000;
   font-size: 11px;
   font-weight: 700;
 }
 
 .achievement-track {
   height: 5px;
-  background: #383838;
-  border-radius: 10px;
+  background: #292929;
+  border-radius: 2px;
   overflow: hidden;
   margin-top: 13px;
 }
 
 .achievement-fill {
   height: 100%;
-  background: linear-gradient(90deg, #8d8066, #d4c19a);
-  border-radius: 10px;
+  background: #8b0000;
+  border-radius: 2px;
   transition: width .4s ease;
 }
 
 .achievement-status {
-  color: var(--gold);
+  color: #a00000;
   font-size: 9px;
   letter-spacing: 1px;
   margin-top: 9px;
 }
 
+/* ACHIEVEMENT POPUP */
+
 .achievement-overlay {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: rgba(0,0,0,.88);
+  background: rgba(0,0,0,.94);
   display: none;
   align-items: center;
   justify-content: center;
@@ -818,10 +915,10 @@ hr {
   max-width: 340px;
   text-align: center;
   padding: 30px 22px;
-  background: linear-gradient(145deg, #26231d, #111);
-  border: 1px solid #8c754a;
-  border-radius: 20px;
-  box-shadow: 0 0 50px rgba(185,164,122,.15);
+  background: #0d0d0d;
+  border: 1px solid #5a1515;
+  border-radius: 8px;
+  box-shadow: 0 0 35px rgba(139,0,0,.12);
 }
 
 .achievement-popup-icon {
@@ -831,8 +928,20 @@ hr {
 }
 
 .achievement-popup h2 {
-  color: #d4bd8c;
+  color: #a00000;
   font-size: 25px;
+}
+
+/* GENERAL */
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 19px 0;
+}
+
+.history-item {
+  border-bottom-color: var(--line);
 }
 
 @keyframes achievementFade {
@@ -846,406 +955,13 @@ hr {
   100% { transform: scale(1); }
 }
 
-
-/* =================================
-   YEARS ARC — DARK DISCIPLINE
-================================= */
-
-:root {
-  --bg: #050505;
-  --panel: #0d0d0d;
-  --panel2: #151515;
-  --line: #292929;
-  --text: #f2f2f2;
-  --muted: #777777;
-  --gold: #e02b2b;
-  --green: #8c9690;
-  --red: #e02b2b;
-  --radius: 10px;
+@media (min-width: 600px) {
+  .app {
+    padding: 28px;
+  }
 }
-
-/* TYPOGRAPHIE */
-h1, h2, .brand,
-.year-number, .total-number,
-.session-timer, .session-exercise {
-  font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
-  font-weight: 850;
-  letter-spacing: -1px;
-  text-transform: uppercase;
-}
-
-h1 {
-  font-size: 34px;
-  letter-spacing: -1.5px;
-}
-
-h2 {
-  font-size: 23px;
-  letter-spacing: -0.7px;
-}
-
-h3 {
-  color: #e02b2b;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-}
-
-.brand {
-  font-size: 27px;
-  letter-spacing: 3px;
-}
-
-.tagline {
-  color: #e02b2b;
-  font-weight: 800;
-}
-
-/* CARTES */
-.card {
-  background: #0d0d0d;
-  border: 1px solid #262626;
-  border-radius: 10px;
-  box-shadow: none;
-}
-
-.hero {
-  background: linear-gradient(135deg, #171717, #080808 75%);
-  border: 1px solid #383838;
-}
-
-.hero:after {
-  border-color: rgba(224,43,43,.12);
-}
-
-.eyebrow,
-.group-label,
-.section-title span {
-  color: #e02b2b;
-  font-weight: 800;
-}
-
-/* PROGRESSION */
-.progress-track {
-  background: #292929;
-  border-radius: 0;
-}
-
-.progress-fill {
-  background: #e02b2b;
-  border-radius: 0;
-}
-
-/* BOUTONS */
-.primary {
-  background: #e02b2b;
-  color: #fff;
-  border: 1px solid #e02b2b;
-  border-radius: 5px;
-  font-weight: 850;
-}
-
-.secondary {
-  background: #171717;
-  color: #eee;
-  border: 1px solid #393939;
-  border-radius: 5px;
-}
-
-.danger {
-  background: #260d0d;
-  color: #ff7777;
-  border: 1px solid #652020;
-  border-radius: 5px;
-}
-
-/* CHAMPS */
-input,
-select,
-textarea {
-  background: #090909;
-  border: 1px solid #303030;
-  border-radius: 5px;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-  border-color: #e02b2b;
-}
-
-/* HABITUDES */
-.check {
-  border-radius: 4px;
-  border-color: #555;
-}
-
-.check:checked {
-  background: #e02b2b;
-  border-color: #e02b2b;
-}
-
-.weekly-count {
-  color: #e02b2b;
-}
-
-/* ONGLETS */
-.tabs {
-  border-bottom: 1px solid #292929;
-}
-
-.tab {
-  border-radius: 5px;
-  border-color: #292929;
-  font-weight: 750;
-}
-
-.tab.active {
-  background: #e02b2b;
-  color: #fff;
-  border-color: #e02b2b;
-}
-
-/* NAVIGATION */
-.nav {
-  background: rgba(5,5,5,.97);
-  border-top: 1px solid #292929;
-}
-
-.nav button {
-  font-weight: 750;
-}
-
-.nav button.active {
-  background: #1a1a1a;
-  color: #e02b2b;
-}
-
-/* ENTRAÎNEMENTS */
-.exercise {
-  background: #0c0c0c;
-  border: 1px solid #292929;
-  border-radius: 7px;
-}
-
-.mini-btn {
-  background: #171717;
-  border-color: #353535;
-  border-radius: 4px;
-  color: #eee;
-}
-
-/* MODE SÉANCE */
-.session-card {
-  background: linear-gradient(145deg, #151515, #080808);
-  border: 1px solid #3a3a3a;
-  border-radius: 10px;
-  box-shadow: none;
-}
-
-.session-kicker {
-  color: #e02b2b;
-  font-weight: 850;
-}
-
-.session-timer {
-  color: #fff;
-  font-size: 68px;
-}
-
-.session-stat {
-  background: #101010;
-  border: 1px solid #292929;
-  border-radius: 5px;
-}
-
-.session-stat strong {
-  color: #e02b2b;
-  font-family: -apple-system, BlinkMacSystemFont, "Arial", sans-serif;
-  font-weight: 850;
-}
-
-.session-progress {
-  border-radius: 0;
-}
-
-.session-progress-fill {
-  background: #e02b2b;
-}
-
-/* CALENDRIER */
-.calendar-day {
-  background: #171717;
-  border-radius: 4px;
-}
-
-.calendar-day.done {
-  background: #28372e;
-  color: #b9d7c1;
-}
-
-.calendar-day.missed {
-  background: #481919;
-  color: #ffb4b4;
-}
-
-.calendar-day.today {
-  outline: 2px solid #e02b2b;
-}
-
-/* NOTIFICATIONS */
-.notice {
-  background: #151010;
-  border-left: 3px solid #e02b2b;
-  border-radius: 3px;
-}
-
-/* BADGES */
-.pill {
-  border: 1px solid #702323;
-  color: #ff5555;
-  border-radius: 4px;
-}
-
-.achievement-item {
-  background: #0d0d0d;
-  border: 1px solid #292929;
-  border-radius: 7px;
-}
-
-.achievement-icon {
-  background: #171010;
-  border: 1px solid #632020;
-  border-radius: 7px;
-  color: #ef4444;
-}
-
-.achievement-percent,
-.achievement-status {
-  color: #e02b2b;
-}
-
-.achievement-track {
-  background: #292929;
-  border-radius: 0;
-}
-
-.achievement-fill {
-  background: #e02b2b;
-  border-radius: 0;
-}
-
-.achievement-popup {
-  background: #101010;
-  border: 1px solid #8a2525;
-  border-radius: 9px;
-  box-shadow: 0 0 35px rgba(224,43,43,.10);
-}
-
-.achievement-popup h2 {
-  color: #e02b2b;
-}
-
-
-/* YEARS ARC — COMMAND HEADER */
-
-.command-header {
-  display: flex;
-  flex-direction: column;
-  gap: 19px;
-  padding: 17px 0 20px;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #e02b2b;
-  position: relative;
-}
-
-.command-header::after {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 55px;
-  height: 3px;
-  background: #e02b2b;
-}
-
-.command-topline {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.command-system,
-.command-status,
-.command-date-label,
-.command-subtitle {
-  font-size: 8px;
-  font-weight: 850;
-  letter-spacing: 2px;
-}
-
-.command-system {
-  color: #777;
-}
-
-.command-status {
-  color: #e02b2b;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.status-light {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #e02b2b;
-  box-shadow: 0 0 9px #e02b2b;
-}
-
-.command-header .brand {
-  font-size: 37px;
-  letter-spacing: 2px;
-  line-height: 1;
-}
-
-.brand-red {
-  color: #e02b2b;
-}
-
-.command-header .tagline {
-  font-size: 8px;
-  margin-top: 9px;
-  letter-spacing: 2px;
-}
-
-.command-subtitle {
-  color: #777;
-  margin-top: 15px;
-}
-
-.command-date {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid #242424;
-  padding-top: 12px;
-}
-
-.command-date-label {
-  color: #666;
-}
-
-.command-date .header-date {
-  color: #eee;
-  font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 1px;
-}
-
-  
 </style>
+
 </head>
 
 <body>
