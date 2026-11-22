@@ -2021,8 +2021,11 @@ function showAchievementPopup(badge) {
 }
 
 function renderAchievements() {
-  const list=document.getElementById("achievementList");
-  if(!list) return;
+  const time=document.getElementById("achievementTime");
+  const sport=document.getElementById("achievementSport");
+  const discipline=document.getElementById("achievementDiscipline");
+
+  if(!time || !sport || !discipline) return;
 
   const unlocked=ACHIEVEMENTS.filter(b=>data.achievements?.[b.id]).length;
 
@@ -2030,19 +2033,13 @@ function renderAchievements() {
     unlocked+" / "+ACHIEVEMENTS.length+" BADGES DÉBLOQUÉS";
 
   const categories=[
-    {title:"TIME & CONSISTENCY",types:["time","months","years"]},
-    {title:"SPORT & PERFORMANCE",types:["sport"]},
-    {title:"DISCIPLINE & HABITS",types:["habits","perfect"]}
+    {container:time,types:["time","months","years"]},
+    {container:sport,types:["sport"]},
+    {container:discipline,types:["habits","perfect"]}
   ];
 
-  list.innerHTML="";
-
   categories.forEach(category=>{
-    const heading=document.createElement("div");
-    heading.className="group-label";
-    heading.style.margin="24px 0 12px";
-    heading.textContent=category.title;
-    list.appendChild(heading);
+    category.container.innerHTML="";
 
     ACHIEVEMENTS.filter(b=>category.types.includes(b.type))
       .forEach(badge=>{
@@ -2075,7 +2072,7 @@ function renderAchievements() {
           </div>
         `;
 
-        list.appendChild(item);
+        category.container.appendChild(item);
       });
   });
 }
