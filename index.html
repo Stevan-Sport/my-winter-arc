@@ -1145,19 +1145,137 @@ textarea:focus {
   color: #e02b2b;
 }
 
+
+/* YEARS ARC — COMMAND HEADER */
+
+.command-header {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding: 17px 0 20px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #e02b2b;
+  position: relative;
+}
+
+.command-header::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 55px;
+  height: 3px;
+  background: #e02b2b;
+}
+
+.command-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.command-system,
+.command-status,
+.command-date-label,
+.command-subtitle {
+  font-size: 8px;
+  font-weight: 850;
+  letter-spacing: 2px;
+}
+
+.command-system {
+  color: #777;
+}
+
+.command-status {
+  color: #e02b2b;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.status-light {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #e02b2b;
+  box-shadow: 0 0 9px #e02b2b;
+}
+
+.command-header .brand {
+  font-size: 37px;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.brand-red {
+  color: #e02b2b;
+}
+
+.command-header .tagline {
+  font-size: 8px;
+  margin-top: 9px;
+  letter-spacing: 2px;
+}
+
+.command-subtitle {
+  color: #777;
+  margin-top: 15px;
+}
+
+.command-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #242424;
+  padding-top: 12px;
+}
+
+.command-date-label {
+  color: #666;
+}
+
+.command-date .header-date {
+  color: #eee;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
   
 </style>
 </head>
 
 <body>
 <div class="app">
-<header>
-  <div>
-    <div class="brand">YEARS ARC</div>
+
+<header class="command-header">
+  <div class="command-brand">
+    <div class="command-topline">
+      <span class="command-system">SYSTEM 001</span>
+      <span class="command-status">
+        <span class="status-light"></span>
+        DISCIPLINE ACTIVE
+      </span>
+    </div>
+
+    <div class="brand">YEARS<span class="brand-red"> ARC</span></div>
+
     <div class="tagline">365 DAYS. ONE VERSION BETTER.</div>
+
+    <div class="command-subtitle">
+      EXTREME PERFORMANCE SYSTEM
+    </div>
   </div>
-  <div class="header-date" id="headerDate"></div>
+
+  <div class="command-date">
+    <span class="command-date-label">CURRENT SESSION</span>
+    <div class="header-date" id="headerDate"></div>
+  </div>
 </header>
+
 
 <div class="tabs">
   <button class="tab active" data-page="home">ACCUEIL</button>
