@@ -1775,7 +1775,97 @@ document.getElementById("performanceExercise").addEventListener("change", () => 
   renderPerformanceTracker();
 });
 
+// BODY TRACKER
+function renderBodyTracker() {
+  const history = document.getElementById("bodyHistory");
+  const dateInput = document.getElementById("bodyDate");
 
+  if (!history || !dateInput) return;
+
+  if (!dateInput.value) {
+    dateInput.value = localDate();
+  }
+
+  const measurements = data.bodyMeasurements || [];
+
+  if (measurements.length === 0) {
+    history.innerHTML = '<p class="empty">Aucune mesure enregistrée.</p>';
+    return;
+  }
+
+  history.innerHTML = [...measurements]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map(m => `
+      <div class="history-item">
+        <strong>${escapeHTML(m.date)}</strong>
+        <p>
+          ${m.weight !== null ? `Poids : ${m.weight} kg<br>` : ""}
+          ${m.arms !== null ? `Bras : ${m.arms} cm<br>` : ""}
+          ${m.chest !== null ? `Poitrine : ${m.chest} cm<br>` : ""}
+          ${m.waist !== null ? `Taille : ${m.waist} cm<br>` : ""}
+          ${m.hips !== null ? `Hanches : ${m.hips} cm<br>` : ""}
+          ${m.thighs !== null ? `Cuisses : ${m.thighs} cm<br>` : ""}
+        </p>
+        ${m.notes ? `<p>${escapeHTML(m.notes)}</p>` : ""}
+      </div>
+    `)
+    .join("");
+}
+
+document.getElementById("saveBodyMeasurement")?.addEventListener("click", () => {
+  const date = document.getElementById("bodyDate").value;
+
+  const fields = {
+    weight: "bodyWeight",
+    arms: "bodyArms",
+    chest: "bodyChest",
+    waist: "bodyWaist",
+    hips: "bodyHips",
+    thighs: "bodyThighs"
+  };
+
+  const values = {};
+
+  for (const [key, id] of Object.entries(fields)) {
+    const raw = document.getElementById(id).value.trim();
+    values[key] = raw === "" ? null : Number(raw);
+  }
+
+  const notes = document.getElementById("bodyNotes").value.trim();
+
+  if (!date) {
+    alert("Choisis une date.");
+    return;
+  }
+
+  if (Object.values(values).every(value => value === null) && !notes) {
+    alert("Ajoute au moins une mesure ou une note.");
+    return;
+  }
+
+  if (Object.values(values).some(value => value !== null && (!Number.isFinite(value) || value <= 0))) {
+    alert("Les mesures doivent être des nombres supérieurs à zéro.");
+    return;
+  }
+
+  data.bodyMeasurements = data.bodyMeasurements || [];
+
+  const measurement = { date, ...values, notes };
+
+  const existingIndex = data.bodyMeasurements.findIndex(m => m.date === date);
+
+  if (existingIndex >= 0) {
+    data.bodyMeasurements[existingIndex] = measurement;
+  } else {
+    data.bodyMeasurements.push(measurement);
+  }
+
+  saveData();
+  renderBodyTracker();
+
+  alert("Mesures enregistrées !");
+});
+  
 /* MODE SÉANCE — MINUTEUR ET ENCHAÎNEMENT */
 
 let activeWorkout = null;
