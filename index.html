@@ -1034,11 +1034,65 @@ hr {
       </p>
     </div>
 
+   
     <div id="performanceHistory"></div>
+  </div>
+
+  <!-- BODY TRACKER -->
+  <div class="card" id="bodyTracker">
+    <h3>BODY TRACKER</h3>
+    <p class="muted small">
+      Suis ton évolution physique, mesure après mesure.
+    </p>
+
+    <label>DATE DE LA MESURE</label>
+    <input type="date" id="bodyDate">
+
+    <label>POIDS (KG)</label>
+    <input type="number" id="bodyWeight" min="0" step="0.1" placeholder="Ex : 75.5">
+
+    <div class="group-label">MES MENSURATIONS (CM)</div>
+
+    <div class="form-grid">
+      <div>
+        <label>BRAS</label>
+        <input type="number" id="bodyArms" min="0" step="0.1" placeholder="cm">
+      </div>
+      <div>
+        <label>POITRINE</label>
+        <input type="number" id="bodyChest" min="0" step="0.1" placeholder="cm">
+      </div>
+      <div>
+        <label>TAILLE</label>
+        <input type="number" id="bodyWaist" min="0" step="0.1" placeholder="cm">
+      </div>
+      <div>
+        <label>HANCHES</label>
+        <input type="number" id="bodyHips" min="0" step="0.1" placeholder="cm">
+      </div>
+      <div>
+        <label>CUISSES</label>
+        <input type="number" id="bodyThighs" min="0" step="0.1" placeholder="cm">
+      </div>
+    </div>
+
+    <label>NOTES PERSONNELLES</label>
+    <textarea id="bodyNotes" placeholder="Comment te sens-tu ?"></textarea>
+
+    <button class="primary full" id="saveBodyMeasurement">
+      ENREGISTRER MES MESURES
+    </button>
+
+    <hr>
+    <div class="group-label">DERNIÈRES MESURES</div>
+    <div id="bodyHistory">
+      <p class="empty">Aucune mesure enregistrée.</p>
+    </div>
   </div>
 </section>
 
 <!-- GLOW UP -->
+
 <section class="page" id="glow">
   <h1>GLOW UP.</h1>
   <p class="muted small">Tes objectifs. Ton évolution. À ton rythme.</p>
